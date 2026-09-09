@@ -1,0 +1,315 @@
+[
+  {
+    "column_name": "CLIENTNUM",
+    "data_type": "int64",
+    "description": "Unique customer account identifier",
+    "feature_group": "Identifier",
+    "used_for_modeling": false,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 10127,
+    "example_values": [
+      "768805383",
+      "818770008",
+      "713982108"
+    ]
+  },
+  {
+    "column_name": "Attrition_Flag",
+    "data_type": "object",
+    "description": "Target variable: Existing Customer (0) or Attrited Customer (1)",
+    "feature_group": "Target",
+    "used_for_modeling": false,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 2,
+    "example_values": [
+      "Existing Customer",
+      "Attrited Customer"
+    ]
+  },
+  {
+    "column_name": "Customer_Age",
+    "data_type": "int64",
+    "description": "Customer age in years",
+    "feature_group": "Demographics",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 45,
+    "example_values": [
+      "45",
+      "49",
+      "51"
+    ]
+  },
+  {
+    "column_name": "Gender",
+    "data_type": "object",
+    "description": "Customer gender (M=Male, F=Female)",
+    "feature_group": "Demographics",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 2,
+    "example_values": [
+      "M",
+      "F"
+    ]
+  },
+  {
+    "column_name": "Dependent_count",
+    "data_type": "int64",
+    "description": "Number of financial dependents",
+    "feature_group": "Demographics",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 6,
+    "example_values": [
+      "3",
+      "5",
+      "4"
+    ]
+  },
+  {
+    "column_name": "Education_Level",
+    "data_type": "object",
+    "description": "Educational qualification of the account holder",
+    "feature_group": "Demographics",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": true,
+    "unique_values_count": 7,
+    "example_values": [
+      "High School",
+      "Graduate",
+      "Uneducated"
+    ]
+  },
+  {
+    "column_name": "Marital_Status",
+    "data_type": "object",
+    "description": "Marital status (Married, Single, Divorced, Unknown)",
+    "feature_group": "Demographics",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": true,
+    "unique_values_count": 4,
+    "example_values": [
+      "Married",
+      "Single",
+      "Unknown"
+    ]
+  },
+  {
+    "column_name": "Income_Category",
+    "data_type": "object",
+    "description": "Annual income bracket of the account holder",
+    "feature_group": "Demographics",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": true,
+    "unique_values_count": 6,
+    "example_values": [
+      "$60K - $80K",
+      "Less than $40K",
+      "$80K - $120K"
+    ]
+  },
+  {
+    "column_name": "Card_Category",
+    "data_type": "object",
+    "description": "Type of credit card held (Blue, Silver, Gold, Platinum)",
+    "feature_group": "Product / Relationship",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 4,
+    "example_values": [
+      "Blue",
+      "Gold",
+      "Silver"
+    ]
+  },
+  {
+    "column_name": "Months_on_book",
+    "data_type": "int64",
+    "description": "Tenure of customer relationship with the bank in months",
+    "feature_group": "Product / Relationship",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 44,
+    "example_values": [
+      "39",
+      "44",
+      "36"
+    ]
+  },
+  {
+    "column_name": "Total_Relationship_Count",
+    "data_type": "int64",
+    "description": "Total number of banking products held by the customer",
+    "feature_group": "Product / Relationship",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 6,
+    "example_values": [
+      "5",
+      "6",
+      "4"
+    ]
+  },
+  {
+    "column_name": "Months_Inactive_12_mon",
+    "data_type": "int64",
+    "description": "Number of inactive months in the last 12 months",
+    "feature_group": "Engagement",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 7,
+    "example_values": [
+      "1",
+      "4",
+      "2"
+    ]
+  },
+  {
+    "column_name": "Contacts_Count_12_mon",
+    "data_type": "int64",
+    "description": "Number of contacts between customer and bank in last 12 months",
+    "feature_group": "Engagement",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 7,
+    "example_values": [
+      "3",
+      "2",
+      "0"
+    ]
+  },
+  {
+    "column_name": "Credit_Limit",
+    "data_type": "float64",
+    "description": "Credit limit on the credit card account",
+    "feature_group": "Financial / Credit",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 6205,
+    "example_values": [
+      "12691.0",
+      "8256.0",
+      "3418.0"
+    ]
+  },
+  {
+    "column_name": "Total_Revolving_Bal",
+    "data_type": "int64",
+    "description": "Total revolving balance on the credit card",
+    "feature_group": "Financial / Credit",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 1974,
+    "example_values": [
+      "777",
+      "864",
+      "0"
+    ]
+  },
+  {
+    "column_name": "Avg_Open_To_Buy",
+    "data_type": "float64",
+    "description": "Average open to buy credit line (Credit_Limit - Total_Revolving_Bal)",
+    "feature_group": "Financial / Credit",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 6813,
+    "example_values": [
+      "11914.0",
+      "7392.0",
+      "3418.0"
+    ]
+  },
+  {
+    "column_name": "Avg_Utilization_Ratio",
+    "data_type": "float64",
+    "description": "Average credit card utilization ratio",
+    "feature_group": "Financial / Credit",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 964,
+    "example_values": [
+      "0.061",
+      "0.105",
+      "0.0"
+    ]
+  },
+  {
+    "column_name": "Total_Amt_Chng_Q4_Q1",
+    "data_type": "float64",
+    "description": "Ratio of total transaction amount in Q4 compared to Q1",
+    "feature_group": "Transaction Behavior",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 1158,
+    "example_values": [
+      "1.335",
+      "1.541",
+      "2.594"
+    ]
+  },
+  {
+    "column_name": "Total_Trans_Amt",
+    "data_type": "int64",
+    "description": "Total transaction amount in the last 12 months",
+    "feature_group": "Transaction Behavior",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 5033,
+    "example_values": [
+      "1144",
+      "1291",
+      "1887"
+    ]
+  },
+  {
+    "column_name": "Total_Trans_Ct",
+    "data_type": "int64",
+    "description": "Total transaction count in the last 12 months",
+    "feature_group": "Transaction Behavior",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 126,
+    "example_values": [
+      "42",
+      "33",
+      "20"
+    ]
+  },
+  {
+    "column_name": "Total_Ct_Chng_Q4_Q1",
+    "data_type": "float64",
+    "description": "Ratio of total transaction count in Q4 compared to Q1",
+    "feature_group": "Transaction Behavior",
+    "used_for_modeling": true,
+    "null_count": 0,
+    "has_unknown": false,
+    "unique_values_count": 830,
+    "example_values": [
+      "1.625",
+      "3.714",
+      "2.333"
+    ]
+  }
+]

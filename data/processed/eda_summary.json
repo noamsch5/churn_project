@@ -1,0 +1,305 @@
+{
+  "dataset_size": 10127,
+  "retained_count": 8500,
+  "attrited_count": 1627,
+  "churn_rate": 0.1607,
+  "target_correlations": [
+    {
+      "feature": "Total_Trans_Ct",
+      "correlation": -0.3714
+    },
+    {
+      "feature": "declining_trans_ct_flag",
+      "correlation": 0.3333
+    },
+    {
+      "feature": "Total_Ct_Chng_Q4_Q1",
+      "correlation": -0.2901
+    },
+    {
+      "feature": "trans_per_month",
+      "correlation": -0.2872
+    },
+    {
+      "feature": "Total_Revolving_Bal",
+      "correlation": -0.2631
+    },
+    {
+      "feature": "Contacts_Count_12_mon",
+      "correlation": 0.2045
+    },
+    {
+      "feature": "Avg_Utilization_Ratio",
+      "correlation": -0.1784
+    },
+    {
+      "feature": "Total_Trans_Amt",
+      "correlation": -0.1686
+    },
+    {
+      "feature": "Months_Inactive_12_mon",
+      "correlation": 0.1524
+    },
+    {
+      "feature": "inactivity_ratio",
+      "correlation": 0.1524
+    },
+    {
+      "feature": "declining_trans_amt_flag",
+      "correlation": 0.1519
+    },
+    {
+      "feature": "Total_Relationship_Count",
+      "correlation": -0.15
+    },
+    {
+      "feature": "trans_amt_per_month",
+      "correlation": -0.1453
+    },
+    {
+      "feature": "Total_Amt_Chng_Q4_Q1",
+      "correlation": -0.1311
+    },
+    {
+      "feature": "Credit_Limit",
+      "correlation": -0.0239
+    },
+    {
+      "feature": "Dependent_count",
+      "correlation": 0.019
+    },
+    {
+      "feature": "Customer_Age",
+      "correlation": 0.0182
+    },
+    {
+      "feature": "avg_trans_value",
+      "correlation": 0.0162
+    },
+    {
+      "feature": "Months_on_book",
+      "correlation": 0.0137
+    },
+    {
+      "feature": "Avg_Open_To_Buy",
+      "correlation": -0.0003
+    }
+  ],
+  "numerical_summaries": {
+    "Customer_Age": {
+      "mean": 46.326,
+      "std": 8.017,
+      "median": 46.0,
+      "q25": 41.0,
+      "q75": 52.0,
+      "min": 26.0,
+      "max": 73.0
+    },
+    "Dependent_count": {
+      "mean": 2.346,
+      "std": 1.299,
+      "median": 2.0,
+      "q25": 1.0,
+      "q75": 3.0,
+      "min": 0.0,
+      "max": 5.0
+    },
+    "Months_on_book": {
+      "mean": 35.928,
+      "std": 7.986,
+      "median": 36.0,
+      "q25": 31.0,
+      "q75": 40.0,
+      "min": 13.0,
+      "max": 56.0
+    },
+    "Total_Relationship_Count": {
+      "mean": 3.813,
+      "std": 1.554,
+      "median": 4.0,
+      "q25": 3.0,
+      "q75": 5.0,
+      "min": 1.0,
+      "max": 6.0
+    },
+    "Months_Inactive_12_mon": {
+      "mean": 2.341,
+      "std": 1.011,
+      "median": 2.0,
+      "q25": 2.0,
+      "q75": 3.0,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "Contacts_Count_12_mon": {
+      "mean": 2.455,
+      "std": 1.106,
+      "median": 2.0,
+      "q25": 2.0,
+      "q75": 3.0,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "Credit_Limit": {
+      "mean": 8631.954,
+      "std": 9088.777,
+      "median": 4549.0,
+      "q25": 2555.0,
+      "q75": 11067.5,
+      "min": 1438.3,
+      "max": 34516.0
+    },
+    "Total_Revolving_Bal": {
+      "mean": 1162.814,
+      "std": 814.987,
+      "median": 1276.0,
+      "q25": 359.0,
+      "q75": 1784.0,
+      "min": 0.0,
+      "max": 2517.0
+    },
+    "Avg_Open_To_Buy": {
+      "mean": 7469.14,
+      "std": 9090.685,
+      "median": 3474.0,
+      "q25": 1324.5,
+      "q75": 9859.0,
+      "min": 3.0,
+      "max": 34516.0
+    },
+    "Avg_Utilization_Ratio": {
+      "mean": 0.275,
+      "std": 0.276,
+      "median": 0.176,
+      "q25": 0.023,
+      "q75": 0.503,
+      "min": 0.0,
+      "max": 0.999
+    },
+    "Total_Amt_Chng_Q4_Q1": {
+      "mean": 0.76,
+      "std": 0.219,
+      "median": 0.736,
+      "q25": 0.631,
+      "q75": 0.859,
+      "min": 0.0,
+      "max": 3.397
+    },
+    "Total_Trans_Amt": {
+      "mean": 4404.086,
+      "std": 3397.129,
+      "median": 3899.0,
+      "q25": 2155.5,
+      "q75": 4741.0,
+      "min": 510.0,
+      "max": 18484.0
+    },
+    "Total_Trans_Ct": {
+      "mean": 64.859,
+      "std": 23.473,
+      "median": 67.0,
+      "q25": 45.0,
+      "q75": 81.0,
+      "min": 10.0,
+      "max": 139.0
+    },
+    "Total_Ct_Chng_Q4_Q1": {
+      "mean": 0.712,
+      "std": 0.238,
+      "median": 0.702,
+      "q25": 0.582,
+      "q75": 0.818,
+      "min": 0.0,
+      "max": 3.714
+    },
+    "avg_trans_value": {
+      "mean": 62.613,
+      "std": 26.404,
+      "median": 55.795,
+      "q25": 47.515,
+      "q75": 65.477,
+      "min": 19.138,
+      "max": 190.193
+    },
+    "trans_per_month": {
+      "mean": 1.923,
+      "std": 0.912,
+      "median": 1.857,
+      "q25": 1.273,
+      "q75": 2.361,
+      "min": 0.189,
+      "max": 9.769
+    },
+    "trans_amt_per_month": {
+      "mean": 131.012,
+      "std": 115.722,
+      "median": 105.8,
+      "q25": 62.361,
+      "q75": 141.361,
+      "min": 10.0,
+      "max": 1256.846
+    },
+    "inactivity_ratio": {
+      "mean": 0.195,
+      "std": 0.084,
+      "median": 0.167,
+      "q25": 0.167,
+      "q75": 0.25,
+      "min": 0.0,
+      "max": 0.5
+    },
+    "declining_trans_ct_flag": {
+      "mean": 0.277,
+      "std": 0.448,
+      "median": 0.0,
+      "q25": 0.0,
+      "q75": 1.0,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "declining_trans_amt_flag": {
+      "mean": 0.192,
+      "std": 0.394,
+      "median": 0.0,
+      "q25": 0.0,
+      "q75": 0.0,
+      "min": 0.0,
+      "max": 1.0
+    }
+  },
+  "demographics_overview": {
+    "Gender": {
+      "F": 5358,
+      "M": 4769
+    },
+    "Education_Level": {
+      "Graduate": 3128,
+      "High School": 2013,
+      "Unknown": 1519,
+      "Uneducated": 1487,
+      "College": 1013,
+      "Post-Graduate": 516,
+      "Doctorate": 451
+    },
+    "Marital_Status": {
+      "Married": 4687,
+      "Single": 3943,
+      "Unknown": 749,
+      "Divorced": 748
+    },
+    "Income_Category": {
+      "Less than $40K": 3561,
+      "$40K - $60K": 1790,
+      "$80K - $120K": 1535,
+      "$60K - $80K": 1402,
+      "Unknown": 1112,
+      "$120K +": 727
+    },
+    "Card_Category": {
+      "Blue": 9436,
+      "Silver": 555,
+      "Gold": 116,
+      "Platinum": 20
+    }
+  }
+}

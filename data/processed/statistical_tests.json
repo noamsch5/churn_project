@@ -1,0 +1,589 @@
+{
+  "categorical_tests": [
+    {
+      "feature": "Gender",
+      "test_type": "Chi-Square Test of Independence",
+      "chi2_statistic": 13.8656,
+      "degrees_of_freedom": 1,
+      "p_value": 0.00019635846717310307,
+      "cramers_v": 0.037,
+      "effect_size_label": "Negligible",
+      "is_significant": true,
+      "interpretation": "Statistically significant association detected (p = 1.96e-04 < 0.05, Cram\u00e9r's V = 0.037, Negligible effect). Churn rates vary across categories from 14.62% to 17.36%. This indicates a measurable pattern of dependence, though not a causal relationship.",
+      "categories_breakdown": [
+        {
+          "category": "F",
+          "total_customers": 5358,
+          "churned_customers": 930,
+          "retained_customers": 4428,
+          "churn_rate_pct": 17.36
+        },
+        {
+          "category": "M",
+          "total_customers": 4769,
+          "churned_customers": 697,
+          "retained_customers": 4072,
+          "churn_rate_pct": 14.62
+        }
+      ]
+    },
+    {
+      "feature": "Education_Level",
+      "test_type": "Chi-Square Test of Independence",
+      "chi2_statistic": 12.5112,
+      "degrees_of_freedom": 6,
+      "p_value": 0.05148913147336633,
+      "cramers_v": 0.0351,
+      "effect_size_label": "Negligible",
+      "is_significant": false,
+      "interpretation": "No statistically significant association observed (p = 0.0515 >= 0.05, Cram\u00e9r's V = 0.035). Observed category variations are consistent with random fluctuation.",
+      "categories_breakdown": [
+        {
+          "category": "Doctorate",
+          "total_customers": 451,
+          "churned_customers": 95,
+          "retained_customers": 356,
+          "churn_rate_pct": 21.06
+        },
+        {
+          "category": "Post-Graduate",
+          "total_customers": 516,
+          "churned_customers": 92,
+          "retained_customers": 424,
+          "churn_rate_pct": 17.83
+        },
+        {
+          "category": "Unknown",
+          "total_customers": 1519,
+          "churned_customers": 256,
+          "retained_customers": 1263,
+          "churn_rate_pct": 16.85
+        },
+        {
+          "category": "Uneducated",
+          "total_customers": 1487,
+          "churned_customers": 237,
+          "retained_customers": 1250,
+          "churn_rate_pct": 15.94
+        },
+        {
+          "category": "Graduate",
+          "total_customers": 3128,
+          "churned_customers": 487,
+          "retained_customers": 2641,
+          "churn_rate_pct": 15.57
+        },
+        {
+          "category": "College",
+          "total_customers": 1013,
+          "churned_customers": 154,
+          "retained_customers": 859,
+          "churn_rate_pct": 15.2
+        },
+        {
+          "category": "High School",
+          "total_customers": 2013,
+          "churned_customers": 306,
+          "retained_customers": 1707,
+          "churn_rate_pct": 15.2
+        }
+      ]
+    },
+    {
+      "feature": "Marital_Status",
+      "test_type": "Chi-Square Test of Independence",
+      "chi2_statistic": 6.0561,
+      "degrees_of_freedom": 3,
+      "p_value": 0.1089126339484023,
+      "cramers_v": 0.0245,
+      "effect_size_label": "Negligible",
+      "is_significant": false,
+      "interpretation": "No statistically significant association observed (p = 0.1089 >= 0.05, Cram\u00e9r's V = 0.024). Observed category variations are consistent with random fluctuation.",
+      "categories_breakdown": [
+        {
+          "category": "Unknown",
+          "total_customers": 749,
+          "churned_customers": 129,
+          "retained_customers": 620,
+          "churn_rate_pct": 17.22
+        },
+        {
+          "category": "Single",
+          "total_customers": 3943,
+          "churned_customers": 668,
+          "retained_customers": 3275,
+          "churn_rate_pct": 16.94
+        },
+        {
+          "category": "Divorced",
+          "total_customers": 748,
+          "churned_customers": 121,
+          "retained_customers": 627,
+          "churn_rate_pct": 16.18
+        },
+        {
+          "category": "Married",
+          "total_customers": 4687,
+          "churned_customers": 709,
+          "retained_customers": 3978,
+          "churn_rate_pct": 15.13
+        }
+      ]
+    },
+    {
+      "feature": "Income_Category",
+      "test_type": "Chi-Square Test of Independence",
+      "chi2_statistic": 12.8323,
+      "degrees_of_freedom": 5,
+      "p_value": 0.025002425704390645,
+      "cramers_v": 0.0356,
+      "effect_size_label": "Negligible",
+      "is_significant": true,
+      "interpretation": "Statistically significant association detected (p = 2.50e-02 < 0.05, Cram\u00e9r's V = 0.036, Negligible effect). Churn rates vary across categories from 13.48% to 17.33%. This indicates a measurable pattern of dependence, though not a causal relationship.",
+      "categories_breakdown": [
+        {
+          "category": "$120K +",
+          "total_customers": 727,
+          "churned_customers": 126,
+          "retained_customers": 601,
+          "churn_rate_pct": 17.33
+        },
+        {
+          "category": "Less than $40K",
+          "total_customers": 3561,
+          "churned_customers": 612,
+          "retained_customers": 2949,
+          "churn_rate_pct": 17.19
+        },
+        {
+          "category": "Unknown",
+          "total_customers": 1112,
+          "churned_customers": 187,
+          "retained_customers": 925,
+          "churn_rate_pct": 16.82
+        },
+        {
+          "category": "$80K - $120K",
+          "total_customers": 1535,
+          "churned_customers": 242,
+          "retained_customers": 1293,
+          "churn_rate_pct": 15.77
+        },
+        {
+          "category": "$40K - $60K",
+          "total_customers": 1790,
+          "churned_customers": 271,
+          "retained_customers": 1519,
+          "churn_rate_pct": 15.14
+        },
+        {
+          "category": "$60K - $80K",
+          "total_customers": 1402,
+          "churned_customers": 189,
+          "retained_customers": 1213,
+          "churn_rate_pct": 13.48
+        }
+      ]
+    },
+    {
+      "feature": "Card_Category",
+      "test_type": "Chi-Square Test of Independence",
+      "chi2_statistic": 2.2342,
+      "degrees_of_freedom": 3,
+      "p_value": 0.5252382797994759,
+      "cramers_v": 0.0149,
+      "effect_size_label": "Negligible",
+      "is_significant": false,
+      "interpretation": "No statistically significant association observed (p = 0.5252 >= 0.05, Cram\u00e9r's V = 0.015). Observed category variations are consistent with random fluctuation.",
+      "categories_breakdown": [
+        {
+          "category": "Platinum",
+          "total_customers": 20,
+          "churned_customers": 5,
+          "retained_customers": 15,
+          "churn_rate_pct": 25.0
+        },
+        {
+          "category": "Gold",
+          "total_customers": 116,
+          "churned_customers": 21,
+          "retained_customers": 95,
+          "churn_rate_pct": 18.1
+        },
+        {
+          "category": "Blue",
+          "total_customers": 9436,
+          "churned_customers": 1519,
+          "retained_customers": 7917,
+          "churn_rate_pct": 16.1
+        },
+        {
+          "category": "Silver",
+          "total_customers": 555,
+          "churned_customers": 82,
+          "retained_customers": 473,
+          "churn_rate_pct": 14.77
+        }
+      ]
+    }
+  ],
+  "numerical_tests": [
+    {
+      "feature": "Total_Trans_Ct",
+      "mean_churned": 44.934,
+      "mean_retained": 68.673,
+      "median_churned": 43.0,
+      "median_retained": 71.0,
+      "diff_mean": -23.739,
+      "ci_95_diff": [
+        -24.598,
+        -22.88
+      ],
+      "t_statistic": -54.1419,
+      "t_p_value": 0.0,
+      "mann_whitney_u": 2826174.0,
+      "mann_whitney_p_value": 0.0,
+      "cohens_d": -1.0892,
+      "rank_biserial_correlation": 0.5913,
+      "effect_size_label": "Large",
+      "is_significant": true,
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 0.00e+00 < 0.05, Cohen's d = -1.089, Large effect). Attrited customers exhibit on average lower Total_Trans_Ct (mean: 44.93 vs 68.67; 95% CI for difference: [-24.60, -22.88]). This confirms a strong statistical disparity between retained and departing customers."
+    },
+    {
+      "feature": "Total_Ct_Chng_Q4_Q1",
+      "mean_churned": 0.554,
+      "mean_retained": 0.742,
+      "median_churned": 0.531,
+      "median_retained": 0.721,
+      "diff_mean": -0.188,
+      "ci_95_diff": [
+        -0.2,
+        -0.176
+      ],
+      "t_statistic": -30.6067,
+      "t_p_value": 7.156055800934461e-173,
+      "mann_whitney_u": 3522217.0,
+      "mann_whitney_p_value": 1.908240659213709e-216,
+      "cohens_d": -0.8253,
+      "rank_biserial_correlation": 0.4906,
+      "effect_size_label": "Large",
+      "is_significant": true,
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.91e-216 < 0.05, Cohen's d = -0.825, Large effect). Attrited customers exhibit on average lower Total_Ct_Chng_Q4_Q1 (mean: 0.55 vs 0.74; 95% CI for difference: [-0.20, -0.18]). This confirms a strong statistical disparity between retained and departing customers."
+    },
+    {
+      "feature": "trans_per_month",
+      "mean_churned": 1.324,
+      "mean_retained": 2.038,
+      "median_churned": 1.194,
+      "median_retained": 1.972,
+      "diff_mean": -0.713,
+      "ci_95_diff": [
+        -0.749,
+        -0.677
+      ],
+      "t_statistic": -38.9056,
+      "t_p_value": 1.2203720622056503e-270,
+      "mann_whitney_u": 3257241.5,
+      "mann_whitney_p_value": 3.1476516184339352e-251,
+      "cohens_d": -0.8165,
+      "rank_biserial_correlation": 0.5289,
+      "effect_size_label": "Large",
+      "is_significant": true,
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 3.15e-251 < 0.05, Cohen's d = -0.817, Large effect). Attrited customers exhibit on average lower trans_per_month (mean: 1.32 vs 2.04; 95% CI for difference: [-0.75, -0.68]). This confirms a strong statistical disparity between retained and departing customers."
+    },
+    {
+      "feature": "Total_Revolving_Bal",
+      "mean_churned": 672.823,
+      "mean_retained": 1256.604,
+      "median_churned": 0.0,
+      "median_retained": 1364.0,
+      "diff_mean": -583.781,
+      "ci_95_diff": [
+        -631.363,
+        -536.2
+      ],
+      "t_statistic": -24.0473,
+      "t_p_value": 7.089719115628882e-113,
+      "mann_whitney_u": 4318784.0,
+      "mann_whitney_p_value": 1.915678673031676e-129,
+      "cohens_d": -0.7424,
+      "rank_biserial_correlation": 0.3754,
+      "effect_size_label": "Medium",
+      "is_significant": true,
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.92e-129 < 0.05, Cohen's d = -0.742, Medium effect). Attrited customers exhibit on average lower Total_Revolving_Bal (mean: 672.82 vs 1256.60; 95% CI for difference: [-631.36, -536.20]). This confirms a strong statistical disparity between retained and departing customers."
+    },
+    {
+      "feature": "Contacts_Count_12_mon",
+      "mean_churned": 2.972,
+      "mean_retained": 2.356,
+      "median_churned": 3.0,
+      "median_retained": 2.0,
+      "diff_mean": 0.616,
+      "ci_95_diff": [
+        0.558,
+        0.674
+      ],
+      "t_statistic": 20.9014,
+      "t_p_value": 6.68731202643129e-89,
+      "mann_whitney_u": 8890849.5,
+      "mann_whitney_p_value": 1.1108884976394833e-80,
+      "cohens_d": 0.5688,
+      "rank_biserial_correlation": -0.2858,
+      "effect_size_label": "Medium",
+      "is_significant": true,
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.11e-80 < 0.05, Cohen's d = 0.569, Medium effect). Attrited customers exhibit on average higher Contacts_Count_12_mon (mean: 2.97 vs 2.36; 95% CI for difference: [0.56, 0.67]). This confirms a strong statistical disparity between retained and departing customers."
+    },
+    {
+      "feature": "Avg_Utilization_Ratio",
+      "mean_churned": 0.162,
+      "mean_retained": 0.296,
+      "median_churned": 0.0,
+      "median_retained": 0.211,
+      "diff_mean": -0.134,
+      "ci_95_diff": [
+        -0.148,
+        -0.12
+      ],
+      "t_statistic": -18.6228,
+      "t_p_value": 2.7820744076114555e-72,
+      "mann_whitney_u": 4320406.5,
+      "mann_whitney_p_value": 2.8690970172667045e-129,
+      "cohens_d": -0.4937,
+      "rank_biserial_correlation": 0.3752,
+      "effect_size_label": "Small",
+      "is_significant": true,
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 2.87e-129 < 0.05, Cohen's d = -0.494, Small effect). Attrited customers exhibit on average lower Avg_Utilization_Ratio (mean: 0.16 vs 0.30; 95% CI for difference: [-0.15, -0.12]). This confirms a strong statistical disparity between retained and departing customers."
+    },
+    {
+      "feature": "Total_Trans_Amt",
+      "mean_churned": 3095.026,
+      "mean_retained": 4654.656,
+      "median_churned": 2329.0,
+      "median_retained": 4100.0,
+      "diff_mean": -1559.63,
+      "ci_95_diff": [
+        -1694.378,
+        -1424.882
+      ],
+      "t_statistic": -22.6859,
+      "t_p_value": 6.349082122481689e-106,
+      "mann_whitney_u": 4481880.0,
+      "mann_whitney_p_value": 2.719009390771485e-112,
+      "cohens_d": -0.4657,
+      "rank_biserial_correlation": 0.3518,
+      "effect_size_label": "Small",
+      "is_significant": true,
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 2.72e-112 < 0.05, Cohen's d = -0.466, Small effect). Attrited customers exhibit on average lower Total_Trans_Amt (mean: 3095.03 vs 4654.66; 95% CI for difference: [-1694.38, -1424.88]). This confirms a strong statistical disparity between retained and departing customers."
+    },
+    {
+      "feature": "Months_Inactive_12_mon",
+      "mean_churned": 2.693,
+      "mean_retained": 2.274,
+      "median_churned": 3.0,
+      "median_retained": 2.0,
+      "diff_mean": 0.42,
+      "ci_95_diff": [
+        0.371,
+        0.468
+      ],
+      "t_statistic": 16.8619,
+      "t_p_value": 1.7175528991289636e-60,
+      "mann_whitney_u": 8687418.0,
+      "mann_whitney_p_value": 5.4231160241902496e-67,
+      "cohens_d": 0.42,
+      "rank_biserial_correlation": -0.2564,
+      "effect_size_label": "Small",
+      "is_significant": true,
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 5.42e-67 < 0.05, Cohen's d = 0.420, Small effect). Attrited customers exhibit on average higher Months_Inactive_12_mon (mean: 2.69 vs 2.27; 95% CI for difference: [0.37, 0.47]). This confirms a strong statistical disparity between retained and departing customers."
+    },
+    {
+      "feature": "inactivity_ratio",
+      "mean_churned": 0.224,
+      "mean_retained": 0.189,
+      "median_churned": 0.25,
+      "median_retained": 0.167,
+      "diff_mean": 0.035,
+      "ci_95_diff": [
+        0.031,
+        0.039
+      ],
+      "t_statistic": 16.8619,
+      "t_p_value": 1.7175528991295042e-60,
+      "mann_whitney_u": 8687418.0,
+      "mann_whitney_p_value": 5.4231160241902496e-67,
+      "cohens_d": 0.42,
+      "rank_biserial_correlation": -0.2564,
+      "effect_size_label": "Small",
+      "is_significant": true,
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 5.42e-67 < 0.05, Cohen's d = 0.420, Small effect). Attrited customers exhibit on average higher inactivity_ratio (mean: 0.22 vs 0.19; 95% CI for difference: [0.03, 0.04]). This confirms a strong statistical disparity between retained and departing customers."
+    },
+    {
+      "feature": "Total_Relationship_Count",
+      "mean_churned": 3.28,
+      "mean_retained": 3.915,
+      "median_churned": 3.0,
+      "median_retained": 4.0,
+      "diff_mean": -0.635,
+      "ci_95_diff": [
+        -0.718,
+        -0.552
+      ],
+      "t_statistic": -14.9445,
+      "t_p_value": 3.225023329499345e-48,
+      "mann_whitney_u": 5315342.0,
+      "mann_whitney_p_value": 2.9057166698542e-51,
+      "cohens_d": -0.4131,
+      "rank_biserial_correlation": 0.2313,
+      "effect_size_label": "Small",
+      "is_significant": true,
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 2.91e-51 < 0.05, Cohen's d = -0.413, Small effect). Attrited customers exhibit on average lower Total_Relationship_Count (mean: 3.28 vs 3.91; 95% CI for difference: [-0.72, -0.55]). This confirms a strong statistical disparity between retained and departing customers."
+    },
+    {
+      "feature": "trans_amt_per_month",
+      "mean_churned": 92.583,
+      "mean_retained": 138.368,
+      "median_churned": 63.595,
+      "median_retained": 111.778,
+      "diff_mean": -45.785,
+      "ci_95_diff": [
+        -50.593,
+        -40.977
+      ],
+      "t_statistic": -18.6648,
+      "t_p_value": 1.0797702874038542e-73,
+      "mann_whitney_u": 4383021.0,
+      "mann_whitney_p_value": 1.9339870674967599e-121,
+      "cohens_d": -0.3999,
+      "rank_biserial_correlation": 0.3661,
+      "effect_size_label": "Small",
+      "is_significant": true,
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.93e-121 < 0.05, Cohen's d = -0.400, Small effect). Attrited customers exhibit on average lower trans_amt_per_month (mean: 92.58 vs 138.37; 95% CI for difference: [-50.59, -40.98]). This confirms a strong statistical disparity between retained and departing customers."
+    },
+    {
+      "feature": "Total_Amt_Chng_Q4_Q1",
+      "mean_churned": 0.694,
+      "mean_retained": 0.773,
+      "median_churned": 0.701,
+      "median_retained": 0.743,
+      "diff_mean": -0.078,
+      "ci_95_diff": [
+        -0.09,
+        -0.067
+      ],
+      "t_statistic": -13.4225,
+      "t_p_value": 1.305896655530703e-39,
+      "mann_whitney_u": 5806261.5,
+      "mann_whitney_p_value": 1.064474309855412e-24,
+      "cohens_d": -0.36,
+      "rank_biserial_correlation": 0.1603,
+      "effect_size_label": "Small",
+      "is_significant": true,
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.06e-24 < 0.05, Cohen's d = -0.360, Small effect). Attrited customers exhibit on average lower Total_Amt_Chng_Q4_Q1 (mean: 0.69 vs 0.77; 95% CI for difference: [-0.09, -0.07]). This confirms a strong statistical disparity between retained and departing customers."
+    },
+    {
+      "feature": "Credit_Limit",
+      "mean_churned": 8136.039,
+      "mean_retained": 8726.878,
+      "median_churned": 4178.0,
+      "median_retained": 4643.5,
+      "diff_mean": -590.838,
+      "ci_95_diff": [
+        -1073.155,
+        -108.521
+      ],
+      "t_statistic": -2.401,
+      "t_p_value": 0.01642962859130223,
+      "mann_whitney_u": 6361348.0,
+      "mann_whitney_p_value": 3.0078405911217975e-07,
+      "cohens_d": -0.065,
+      "rank_biserial_correlation": 0.08,
+      "effect_size_label": "Negligible",
+      "is_significant": true,
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 3.01e-07 < 0.05, Cohen's d = -0.065, Negligible effect). Attrited customers exhibit on average lower Credit_Limit (mean: 8136.04 vs 8726.88; 95% CI for difference: [-1073.15, -108.52]). This confirms a strong statistical disparity between retained and departing customers."
+    },
+    {
+      "feature": "Customer_Age",
+      "mean_churned": 46.659,
+      "mean_retained": 46.262,
+      "median_churned": 47.0,
+      "median_retained": 46.0,
+      "diff_mean": 0.397,
+      "ci_95_diff": [
+        -0.013,
+        0.808
+      ],
+      "t_statistic": 1.8988,
+      "t_p_value": 0.05771863257633866,
+      "mann_whitney_u": 7104960.5,
+      "mann_whitney_p_value": 0.0780999487812895,
+      "cohens_d": 0.0496,
+      "rank_biserial_correlation": -0.0275,
+      "effect_size_label": "Negligible",
+      "is_significant": false,
+      "interpretation": "No statistically significant difference detected (Mann-Whitney p = 0.0781 >= 0.05, Cohen's d = 0.050). Means are comparable (46.66 vs 46.26)."
+    },
+    {
+      "feature": "avg_trans_value",
+      "mean_churned": 63.593,
+      "mean_retained": 62.425,
+      "median_churned": 54.955,
+      "median_retained": 55.921,
+      "diff_mean": 1.168,
+      "ci_95_diff": [
+        -0.279,
+        2.615
+      ],
+      "t_statistic": 1.5821,
+      "t_p_value": 0.1137653946048938,
+      "mann_whitney_u": 6842451.0,
+      "mann_whitney_p_value": 0.5033689926745302,
+      "cohens_d": 0.0442,
+      "rank_biserial_correlation": 0.0105,
+      "effect_size_label": "Negligible",
+      "is_significant": false,
+      "interpretation": "No statistically significant difference detected (Mann-Whitney p = 0.5034 >= 0.05, Cohen's d = 0.044). Means are comparable (63.59 vs 62.43)."
+    },
+    {
+      "feature": "Months_on_book",
+      "mean_churned": 36.178,
+      "mean_retained": 35.881,
+      "median_churned": 36.0,
+      "median_retained": 36.0,
+      "diff_mean": 0.298,
+      "ci_95_diff": [
+        -0.118,
+        0.713
+      ],
+      "t_statistic": 1.4042,
+      "t_p_value": 0.16038505264259176,
+      "mann_whitney_u": 7079837.5,
+      "mann_whitney_p_value": 0.12366716741255611,
+      "cohens_d": 0.0373,
+      "rank_biserial_correlation": -0.0239,
+      "effect_size_label": "Negligible",
+      "is_significant": false,
+      "interpretation": "No statistically significant difference detected (Mann-Whitney p = 0.1237 >= 0.05, Cohen's d = 0.037). Means are comparable (36.18 vs 35.88)."
+    },
+    {
+      "feature": "Avg_Open_To_Buy",
+      "mean_churned": 7463.216,
+      "mean_retained": 7470.273,
+      "median_churned": 3488.0,
+      "median_retained": 3469.5,
+      "diff_mean": -7.057,
+      "ci_95_diff": [
+        -490.015,
+        475.901
+      ],
+      "t_statistic": -0.0286,
+      "t_p_value": 0.9771547480518785,
+      "mann_whitney_u": 7213717.0,
+      "mann_whitney_p_value": 0.00565236631405401,
+      "cohens_d": -0.0008,
+      "rank_biserial_correlation": -0.0432,
+      "effect_size_label": "Negligible",
+      "is_significant": true,
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 5.65e-03 < 0.05, Cohen's d = -0.001, Negligible effect). Attrited customers exhibit on average lower Avg_Open_To_Buy (mean: 7463.22 vs 7470.27; 95% CI for difference: [-490.01, 475.90]). This confirms a strong statistical disparity between retained and departing customers."
+    }
+  ]
+}
