@@ -18,25 +18,26 @@ interface PerformanceViewProps {
 }
 
 export const PerformanceView: React.FC<PerformanceViewProps> = ({ summary }) => {
+  const [activeThreshold, setActiveThreshold] = useState<number>(
+    summary?.model_performance.selected_threshold ?? 0.5
+  );
+
   if (!summary) {
     return <div className="card-box">Loading model evaluation intelligence...</div>;
   }
 
   const { model_performance } = summary;
-  const { metrics, optimized_metrics, curves, threshold_sweep, selected_threshold, coefficients } =
+  const { metrics, selected_threshold_metrics, curves, threshold_sweep, selected_threshold, coefficients, threshold_selection, odds_ratio_notes } =
     model_performance;
-
-  // Interactive slider state
-  const [activeThreshold, setActiveThreshold] = useState<number>(selected_threshold);
 
   // Find sweep row matching active slider
   const currentThresholdData =
     threshold_sweep.find((s) => Math.abs(s.threshold - activeThreshold) < 0.015) || {
       threshold: activeThreshold,
-      precision: optimized_metrics.precision,
-      recall: optimized_metrics.recall,
-      f1: optimized_metrics.f1,
-      accuracy: optimized_metrics.accuracy,
+      precision: selected_threshold_metrics.precision,
+      recall: selected_threshold_metrics.recall,
+      f1: selected_threshold_metrics.f1,
+      accuracy: selected_threshold_metrics.accuracy,
     };
 
   // Top 10 positive & negative coefficients for chart
@@ -75,7 +76,7 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ summary }) => 
             Because 83.96% of accounts remain active, a naive Dummy Model predicting "Existing Customer" for every cardholder
             achieves <strong>83.96% accuracy</strong> while catching <strong>zero churners (0% Recall, F1 = 0)</strong>.
             Our class-weighted Logistic Regression achieves an <strong>ROC-AUC of {metrics.roc_auc.toFixed(3)}</strong>,
-            identifying <strong>{(metrics.recall * 100).toFixed(1)}% of all churners</strong> at the default threshold, and delivering a <strong>5.25x Lift</strong> in the top decile.
+            identifying <strong>{(selected_threshold_metrics.recall * 100).toFixed(1)}% of holdout churners</strong> at the validation-selected threshold, and delivering a <strong>{selected_threshold_metrics.business_metrics.lift_at_10_pct}x Lift</strong> in the top decile.
           </p>
         </div>
       </div>
@@ -127,21 +128,21 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ summary }) => 
                 </td>
               </tr>
               <tr style={{ backgroundColor: '#f0fdf4' }}>
-                <td><strong>Logistic Regression (Optimal F1 Operational)</strong></td>
+                <td><strong>Logistic Regression (Validation-Selected F1 Threshold)</strong></td>
                 <td className="num-cell" style={{ fontWeight: 700 }}>{selected_threshold.toFixed(2)}</td>
-                <td className="num-cell">{optimized_metrics.roc_auc.toFixed(3)}</td>
-                <td className="num-cell">{(optimized_metrics.recall * 100).toFixed(1)}%</td>
+                <td className="num-cell">{selected_threshold_metrics.roc_auc.toFixed(3)}</td>
+                <td className="num-cell">{(selected_threshold_metrics.recall * 100).toFixed(1)}%</td>
                 <td className="num-cell" style={{ color: '#10b981', fontWeight: 700 }}>
-                  {(optimized_metrics.precision * 100).toFixed(1)}%
+                  {(selected_threshold_metrics.precision * 100).toFixed(1)}%
                 </td>
                 <td className="num-cell" style={{ color: '#10b981', fontWeight: 700 }}>
-                  {optimized_metrics.f1.toFixed(3)}
+                  {selected_threshold_metrics.f1.toFixed(3)}
                 </td>
                 <td className="num-cell" style={{ fontWeight: 700 }}>
-                  {(optimized_metrics.accuracy * 100).toFixed(1)}%
+                  {(selected_threshold_metrics.accuracy * 100).toFixed(1)}%
                 </td>
                 <td className="num-cell" style={{ fontWeight: 700, color: '#2563eb' }}>
-                  {optimized_metrics.business_metrics.lift_at_10_pct}x
+                  {selected_threshold_metrics.business_metrics.lift_at_10_pct}x
                 </td>
               </tr>
             </tbody>
@@ -155,13 +156,16 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ summary }) => 
           <div>
             <h3 className="card-title">Interactive Classification Threshold Simulator</h3>
             <p className="card-subtitle">
-              Adjust the operational decision threshold to balance false alarms (Precision) against missed churners (Recall).
+              Training cross-validation sweep: adjust the threshold to inspect the precision/recall trade-off without using holdout labels.
             </p>
           </div>
           <span className="badge badge-medium">
-            Active Threshold: {(currentThresholdData.threshold * 100).toFixed(0)}%
+            Active Threshold: {(activeThreshold * 100).toFixed(0)}%
           </span>
         </div>
+        <p style={{ fontSize: '0.78rem', color: '#64748b', marginTop: '0.75rem' }}>
+          Selected from {threshold_selection.source}. The final reported model metrics are evaluated once on the untouched holdout test set.
+        </p>
 
         <div className="threshold-slider-container">
           <Sliders size={20} color="#2563eb" />
@@ -247,13 +251,13 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ summary }) => 
       <div className="card-box">
         <h3 className="card-title">Model Coefficients & Odds Ratios ($e^\beta$)</h3>
         <p className="card-subtitle" style={{ marginBottom: '1.25rem' }}>
-          Standardized Logistic Regression weights. Odds ratio {'>'} 1 indicates increased attrition odds per std dev; {'<'} 1 indicates protective retention factors.
+          {odds_ratio_notes.numerical_features} {odds_ratio_notes.categorical_features}
         </p>
 
         <div className="grid-2">
           <div>
             <h4 style={{ fontSize: '0.85rem', color: '#ef4444', fontWeight: 700, marginBottom: '0.5rem' }}>
-              ▲ Top Risk Amplifiers (Increases Churn)
+              ▲ Largest Positive Associations with Churn Odds
             </h4>
             <div className="data-table-container">
               <table className="data-table">
@@ -279,7 +283,7 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ summary }) => 
 
           <div>
             <h4 style={{ fontSize: '0.85rem', color: '#10b981', fontWeight: 700, marginBottom: '0.5rem' }}>
-              ▼ Top Retention Anchors (Protects Against Churn)
+              ▼ Largest Negative Associations with Churn Odds
             </h4>
             <div className="data-table-container">
               <table className="data-table">
@@ -303,6 +307,14 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ summary }) => 
             </div>
           </div>
         </div>
+      </div>
+      <div className="card-box">
+        <h3 className="card-title">Categorical Reference Categories</h3>
+        <p className="card-subtitle">
+          {Object.entries(odds_ratio_notes.categorical_reference_categories)
+            .map(([feature, category]) => `${feature}: ${category}`)
+            .join(' · ')}
+        </p>
       </div>
     </div>
   );

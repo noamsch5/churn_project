@@ -54,7 +54,7 @@ export function App() {
             {activeTab === 'segments' && <SegmentsView summary={summary} />}
             {activeTab === 'performance' && <PerformanceView summary={summary} />}
             {activeTab === 'insights' && <InsightsView summary={summary} />}
-            {activeTab === 'explorer' && <CustomerExplorerView />}
+            {activeTab === 'explorer' && <CustomerExplorerView summary={summary} />}
           </>
         )}
       </main>

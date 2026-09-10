@@ -29,8 +29,9 @@ wheels/
 *.egg
 
 # Data Science artifacts (keep small samples or processed metadata if needed)
-data/raw/BankChurners.csv
-*.joblib
+# The small canonical source dataset is versioned for reproducible clean clones.
+# Trained model artifacts are intentionally versioned so a clean deployment can
+# serve inference without retraining during startup.
 
 # Frontend
 frontend/node_modules/

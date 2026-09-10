@@ -98,7 +98,7 @@ class CombinedAnalysisResponse(BaseModel):
     segment_name: str
     segment_description: str
     recommended_strategy: str
-    key_drivers: list[dict[str, Any]]
+    behavioral_risk_indicators: list[dict[str, Any]]
 
 
 class CustomerRecord(BaseModel):
@@ -118,6 +118,8 @@ class CustomerRecord(BaseModel):
     contacts_count: int
     credit_limit: float
     utilization_ratio: float
+    prediction_scope: str
+    threshold_applied: float
 
 
 class CustomerListResponse(BaseModel):

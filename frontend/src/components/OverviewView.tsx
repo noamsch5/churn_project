@@ -41,6 +41,10 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ summary, onNavigate 
     customers: p.customer_count,
     id: p.cluster_id,
   }));
+  const highestRiskSegment = segmentation.cluster_profiles.reduce((highest, profile) =>
+    profile.churn_rate_pct > highest.churn_rate_pct ? profile : highest
+  );
+  const highestRiskChurnShare = highestRiskSegment.churn_count / eda.attrited_count;
 
   // Target split data
   const targetSplit = [
@@ -92,11 +96,13 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ summary, onNavigate 
 
         <div className="kpi-card accent-emerald">
           <div className="kpi-label">
-            <span>Default Churn Recall</span>
+            <span>Holdout Recall</span>
             <Activity size={16} color="#10b981" />
           </div>
-          <div className="kpi-value">{(model_performance.metrics.recall * 100).toFixed(1)}%</div>
-          <div className="kpi-subtext">82.8% of churners caught at 0.50 thresh</div>
+          <div className="kpi-value">{(model_performance.selected_threshold_metrics.recall * 100).toFixed(1)}%</div>
+          <div className="kpi-subtext">
+            At validation-selected threshold {model_performance.selected_threshold.toFixed(2)}
+          </div>
         </div>
 
         <div className="kpi-card">
@@ -105,7 +111,9 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ summary, onNavigate 
             <Sparkles size={16} color="#2563eb" />
           </div>
           <div className="kpi-value">{model_performance.metrics.business_metrics.lift_at_10_pct}x</div>
-          <div className="kpi-subtext">5.25x random targeting efficiency</div>
+          <div className="kpi-subtext">
+            {model_performance.metrics.business_metrics.lift_at_10_pct}x random targeting efficiency
+          </div>
         </div>
 
         <div className="kpi-card accent-amber">
@@ -113,7 +121,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ summary, onNavigate 
             <span>Discovered Segments</span>
             <Layers size={16} color="#f59e0b" />
           </div>
-          <div className="kpi-value">{segmentation.optimal_k}</div>
+          <div className="kpi-value">{segmentation.selected_k}</div>
           <div className="kpi-subtext">K-Means + 2D PCA profiling</div>
         </div>
       </div>
@@ -160,7 +168,9 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ summary, onNavigate 
             </ResponsiveContainer>
           </div>
           <p style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '0.5rem' }}>
-            <strong>Strategic takeaway:</strong> The Disengaged & Underutilized segment (Cluster 2) exhibits a <strong>26.9% churn rate</strong>, containing 72% of all portfolio churners.
+            <strong>Observed pattern:</strong> {highestRiskSegment.segment_name} (Cluster {highestRiskSegment.cluster_id}) has a{' '}
+            <strong>{highestRiskSegment.churn_rate_pct.toFixed(1)}% churn rate</strong> and contains{' '}
+            {(highestRiskChurnShare * 100).toFixed(1)}% of observed portfolio churners.
           </p>
         </div>
 
@@ -177,8 +187,8 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ summary, onNavigate 
               Model Proof
             </button>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', height: 260 }}>
-            <div style={{ width: '55%', height: '100%' }}>
+          <div className="portfolio-split">
+            <div className="portfolio-chart">
               <ResponsiveContainer>
                 <PieChart>
                   <Pie
@@ -199,7 +209,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ summary, onNavigate 
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            <div style={{ width: '45%', paddingLeft: '1rem', borderLeft: '1px solid #f1f5f9' }}>
+            <div className="portfolio-legend">
               <div style={{ marginBottom: '1rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
                   <div style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#1e3a8a' }} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BarChart3,
   Users,
@@ -7,6 +7,8 @@ import {
   FileSpreadsheet,
   Database,
   Building2,
+  Menu,
+  X,
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -20,6 +22,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveTab,
   isBackendConnected,
 }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const tabs = [
     { id: 'overview', label: 'Executive Overview', icon: BarChart3 },
     { id: 'predictor', label: 'Churn Risk Simulator', icon: Gauge },
@@ -47,9 +50,22 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className={`status-dot ${isBackendConnected ? '' : 'offline'}`} />
           <span>{isBackendConnected ? 'FastAPI Model Server Online' : 'Connecting to API...'}</span>
         </div>
+        <button
+          type="button"
+          className="mobile-menu-button"
+          aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={isMenuOpen}
+          aria-controls="primary-navigation"
+          onClick={() => setIsMenuOpen((open) => !open)}
+        >
+          {isMenuOpen ? <X size={21} /> : <Menu size={21} />}
+        </button>
       </div>
 
-      <nav className="nav-tabs-bar">
+      <nav
+        id="primary-navigation"
+        className={`nav-tabs-bar ${isMenuOpen ? 'mobile-open' : ''}`}
+      >
         <div className="nav-tabs-container">
           {tabs.map((tab) => {
             const Icon = tab.icon;
@@ -58,7 +74,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={tab.id}
                 className={`nav-tab-button ${isActive ? 'active' : ''}`}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => {
+                  setActiveTab(tab.id);
+                  setIsMenuOpen(false);
+                }}
               >
                 <Icon size={16} />
                 <span>{tab.label}</span>

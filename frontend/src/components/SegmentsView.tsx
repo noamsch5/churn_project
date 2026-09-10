@@ -59,8 +59,8 @@ export const SegmentsView: React.FC<SegmentsViewProps> = ({ summary }) => {
       <div className="page-intro">
         <h2 className="page-title">Unsupervised Customer Segmentation</h2>
         <p className="page-description">
-          Natural customer behavioral clusters discovered via K-Means (StandardScaler + $k=4$, evaluated via
-          Silhouette & Elbow criteria). Churn labels were strictly excluded during training.
+          {segmentation.selection_statement} Selection considered the elbow pattern, interpretability,
+          cluster sizes, and business usefulness; k=2 had the highest Silhouette score. Churn labels were excluded during training.
         </p>
       </div>
 

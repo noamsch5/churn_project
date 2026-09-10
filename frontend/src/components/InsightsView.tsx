@@ -11,13 +11,13 @@ interface InsightsViewProps {
 }
 
 export const InsightsView: React.FC<InsightsViewProps> = ({ summary }) => {
+  const [activeTab, setActiveTab] = useState<'numerical' | 'categorical'>('numerical');
+
   if (!summary) {
     return <div className="card-box">Loading statistical hypothesis tests...</div>;
   }
 
   const { statistical_tests } = summary;
-  const [activeTab, setActiveTab] = useState<'numerical' | 'categorical'>('numerical');
-
   return (
     <div>
       <div className="page-intro">
@@ -50,6 +50,10 @@ export const InsightsView: React.FC<InsightsViewProps> = ({ summary }) => {
             All reported p-values and effect sizes quantify empirical associations observed in historical observational data.
             A statistically significant difference does <em>not</em> prove that variable $X$ causes customer attrition.
             Interventions should be treated as retention hypotheses subject to randomized A/B experimentation.
+          </p>
+          <p style={{ fontSize: '0.85rem', color: '#92400e', lineHeight: 1.5, marginTop: '0.5rem' }}>
+            Multiple testing is controlled across {statistical_tests.multiple_testing.family_size} primary tests using the
+            {' '}{statistical_tests.multiple_testing.method} at α = {statistical_tests.multiple_testing.alpha}.
           </p>
         </div>
       </div>

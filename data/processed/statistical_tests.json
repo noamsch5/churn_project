@@ -1,4 +1,10 @@
 {
+  "multiple_testing": {
+    "method": "Benjamini-Hochberg false discovery rate correction",
+    "alpha": 0.05,
+    "family_size": 22,
+    "primary_tests": "Categorical chi-square and numerical Mann-Whitney tests"
+  },
   "categorical_tests": [
     {
       "feature": "Gender",
@@ -25,7 +31,9 @@
           "retained_customers": 4072,
           "churn_rate_pct": 14.62
         }
-      ]
+      ],
+      "fdr_adjusted_p_value": 0.0003085633055577334,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "Education_Level",
@@ -87,7 +95,9 @@
           "retained_customers": 1707,
           "churn_rate_pct": 15.2
         }
-      ]
+      ],
+      "fdr_adjusted_p_value": 0.06663299367141526,
+      "is_significant_fdr_0_05": false
     },
     {
       "feature": "Marital_Status",
@@ -128,7 +138,9 @@
           "retained_customers": 3978,
           "churn_rate_pct": 15.13
         }
-      ]
+      ],
+      "fdr_adjusted_p_value": 0.1261093656244658,
+      "is_significant_fdr_0_05": false
     },
     {
       "feature": "Income_Category",
@@ -183,7 +195,9 @@
           "retained_customers": 1213,
           "churn_rate_pct": 13.48
         }
-      ]
+      ],
+      "fdr_adjusted_p_value": 0.03437833534353713,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "Card_Category",
@@ -224,7 +238,9 @@
           "retained_customers": 473,
           "churn_rate_pct": 14.77
         }
-      ]
+      ],
+      "fdr_adjusted_p_value": 0.5252382797994759,
+      "is_significant_fdr_0_05": false
     }
   ],
   "numerical_tests": [
@@ -247,7 +263,9 @@
       "rank_biserial_correlation": 0.5913,
       "effect_size_label": "Large",
       "is_significant": true,
-      "interpretation": "Statistically significant difference (Mann-Whitney p = 0.00e+00 < 0.05, Cohen's d = -1.089, Large effect). Attrited customers exhibit on average lower Total_Trans_Ct (mean: 44.93 vs 68.67; 95% CI for difference: [-24.60, -22.88]). This confirms a strong statistical disparity between retained and departing customers."
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 0.00e+00 < 0.05, Cohen's d = -1.089, Large effect). Attrited customers exhibit on average lower Total_Trans_Ct (mean: 44.93 vs 68.67; 95% CI for difference: [-24.60, -22.88]). This confirms a strong statistical disparity between retained and departing customers.",
+      "fdr_adjusted_p_value": 0.0,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "Total_Ct_Chng_Q4_Q1",
@@ -268,7 +286,9 @@
       "rank_biserial_correlation": 0.4906,
       "effect_size_label": "Large",
       "is_significant": true,
-      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.91e-216 < 0.05, Cohen's d = -0.825, Large effect). Attrited customers exhibit on average lower Total_Ct_Chng_Q4_Q1 (mean: 0.55 vs 0.74; 95% CI for difference: [-0.20, -0.18]). This confirms a strong statistical disparity between retained and departing customers."
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.91e-216 < 0.05, Cohen's d = -0.825, Large effect). Attrited customers exhibit on average lower Total_Ct_Chng_Q4_Q1 (mean: 0.55 vs 0.74; 95% CI for difference: [-0.20, -0.18]). This confirms a strong statistical disparity between retained and departing customers.",
+      "fdr_adjusted_p_value": 1.3993764834233866e-215,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "trans_per_month",
@@ -289,7 +309,9 @@
       "rank_biserial_correlation": 0.5289,
       "effect_size_label": "Large",
       "is_significant": true,
-      "interpretation": "Statistically significant difference (Mann-Whitney p = 3.15e-251 < 0.05, Cohen's d = -0.817, Large effect). Attrited customers exhibit on average lower trans_per_month (mean: 1.32 vs 2.04; 95% CI for difference: [-0.75, -0.68]). This confirms a strong statistical disparity between retained and departing customers."
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 3.15e-251 < 0.05, Cohen's d = -0.817, Large effect). Attrited customers exhibit on average lower trans_per_month (mean: 1.32 vs 2.04; 95% CI for difference: [-0.75, -0.68]). This confirms a strong statistical disparity between retained and departing customers.",
+      "fdr_adjusted_p_value": 3.462416780277329e-250,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "Total_Revolving_Bal",
@@ -310,7 +332,9 @@
       "rank_biserial_correlation": 0.3754,
       "effect_size_label": "Medium",
       "is_significant": true,
-      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.92e-129 < 0.05, Cohen's d = -0.742, Medium effect). Attrited customers exhibit on average lower Total_Revolving_Bal (mean: 672.82 vs 1256.60; 95% CI for difference: [-631.36, -536.20]). This confirms a strong statistical disparity between retained and departing customers."
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.92e-129 < 0.05, Cohen's d = -0.742, Medium effect). Attrited customers exhibit on average lower Total_Revolving_Bal (mean: 672.82 vs 1256.60; 95% CI for difference: [-631.36, -536.20]). This confirms a strong statistical disparity between retained and departing customers.",
+      "fdr_adjusted_p_value": 1.0536232701674218e-128,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "Contacts_Count_12_mon",
@@ -331,7 +355,9 @@
       "rank_biserial_correlation": -0.2858,
       "effect_size_label": "Medium",
       "is_significant": true,
-      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.11e-80 < 0.05, Cohen's d = 0.569, Medium effect). Attrited customers exhibit on average higher Contacts_Count_12_mon (mean: 2.97 vs 2.36; 95% CI for difference: [0.56, 0.67]). This confirms a strong statistical disparity between retained and departing customers."
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.11e-80 < 0.05, Cohen's d = 0.569, Medium effect). Attrited customers exhibit on average higher Contacts_Count_12_mon (mean: 2.97 vs 2.36; 95% CI for difference: [0.56, 0.67]). This confirms a strong statistical disparity between retained and departing customers.",
+      "fdr_adjusted_p_value": 3.054943368508579e-80,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "Avg_Utilization_Ratio",
@@ -352,7 +378,9 @@
       "rank_biserial_correlation": 0.3752,
       "effect_size_label": "Small",
       "is_significant": true,
-      "interpretation": "Statistically significant difference (Mann-Whitney p = 2.87e-129 < 0.05, Cohen's d = -0.494, Small effect). Attrited customers exhibit on average lower Avg_Utilization_Ratio (mean: 0.16 vs 0.30; 95% CI for difference: [-0.15, -0.12]). This confirms a strong statistical disparity between retained and departing customers."
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 2.87e-129 < 0.05, Cohen's d = -0.494, Small effect). Attrited customers exhibit on average lower Avg_Utilization_Ratio (mean: 0.16 vs 0.30; 95% CI for difference: [-0.15, -0.12]). This confirms a strong statistical disparity between retained and departing customers.",
+      "fdr_adjusted_p_value": 1.26240268759735e-128,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "Total_Trans_Amt",
@@ -373,7 +401,9 @@
       "rank_biserial_correlation": 0.3518,
       "effect_size_label": "Small",
       "is_significant": true,
-      "interpretation": "Statistically significant difference (Mann-Whitney p = 2.72e-112 < 0.05, Cohen's d = -0.466, Small effect). Attrited customers exhibit on average lower Total_Trans_Amt (mean: 3095.03 vs 4654.66; 95% CI for difference: [-1694.38, -1424.88]). This confirms a strong statistical disparity between retained and departing customers."
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 2.72e-112 < 0.05, Cohen's d = -0.466, Small effect). Attrited customers exhibit on average lower Total_Trans_Amt (mean: 3095.03 vs 4654.66; 95% CI for difference: [-1694.38, -1424.88]). This confirms a strong statistical disparity between retained and departing customers.",
+      "fdr_adjusted_p_value": 8.545458085281811e-112,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "Months_Inactive_12_mon",
@@ -394,7 +424,9 @@
       "rank_biserial_correlation": -0.2564,
       "effect_size_label": "Small",
       "is_significant": true,
-      "interpretation": "Statistically significant difference (Mann-Whitney p = 5.42e-67 < 0.05, Cohen's d = 0.420, Small effect). Attrited customers exhibit on average higher Months_Inactive_12_mon (mean: 2.69 vs 2.27; 95% CI for difference: [0.37, 0.47]). This confirms a strong statistical disparity between retained and departing customers."
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 5.42e-67 < 0.05, Cohen's d = 0.420, Small effect). Attrited customers exhibit on average higher Months_Inactive_12_mon (mean: 2.69 vs 2.27; 95% CI for difference: [0.37, 0.47]). This confirms a strong statistical disparity between retained and departing customers.",
+      "fdr_adjusted_p_value": 1.193085525321855e-66,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "inactivity_ratio",
@@ -415,7 +447,9 @@
       "rank_biserial_correlation": -0.2564,
       "effect_size_label": "Small",
       "is_significant": true,
-      "interpretation": "Statistically significant difference (Mann-Whitney p = 5.42e-67 < 0.05, Cohen's d = 0.420, Small effect). Attrited customers exhibit on average higher inactivity_ratio (mean: 0.22 vs 0.19; 95% CI for difference: [0.03, 0.04]). This confirms a strong statistical disparity between retained and departing customers."
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 5.42e-67 < 0.05, Cohen's d = 0.420, Small effect). Attrited customers exhibit on average higher inactivity_ratio (mean: 0.22 vs 0.19; 95% CI for difference: [0.03, 0.04]). This confirms a strong statistical disparity between retained and departing customers.",
+      "fdr_adjusted_p_value": 1.193085525321855e-66,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "Total_Relationship_Count",
@@ -436,7 +470,9 @@
       "rank_biserial_correlation": 0.2313,
       "effect_size_label": "Small",
       "is_significant": true,
-      "interpretation": "Statistically significant difference (Mann-Whitney p = 2.91e-51 < 0.05, Cohen's d = -0.413, Small effect). Attrited customers exhibit on average lower Total_Relationship_Count (mean: 3.28 vs 3.91; 95% CI for difference: [-0.72, -0.55]). This confirms a strong statistical disparity between retained and departing customers."
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 2.91e-51 < 0.05, Cohen's d = -0.413, Small effect). Attrited customers exhibit on average lower Total_Relationship_Count (mean: 3.28 vs 3.91; 95% CI for difference: [-0.72, -0.55]). This confirms a strong statistical disparity between retained and departing customers.",
+      "fdr_adjusted_p_value": 5.8114333397084e-51,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "trans_amt_per_month",
@@ -457,7 +493,9 @@
       "rank_biserial_correlation": 0.3661,
       "effect_size_label": "Small",
       "is_significant": true,
-      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.93e-121 < 0.05, Cohen's d = -0.400, Small effect). Attrited customers exhibit on average lower trans_amt_per_month (mean: 92.58 vs 138.37; 95% CI for difference: [-50.59, -40.98]). This confirms a strong statistical disparity between retained and departing customers."
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.93e-121 < 0.05, Cohen's d = -0.400, Small effect). Attrited customers exhibit on average lower trans_amt_per_month (mean: 92.58 vs 138.37; 95% CI for difference: [-50.59, -40.98]). This confirms a strong statistical disparity between retained and departing customers.",
+      "fdr_adjusted_p_value": 7.091285914154787e-121,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "Total_Amt_Chng_Q4_Q1",
@@ -478,7 +516,9 @@
       "rank_biserial_correlation": 0.1603,
       "effect_size_label": "Small",
       "is_significant": true,
-      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.06e-24 < 0.05, Cohen's d = -0.360, Small effect). Attrited customers exhibit on average lower Total_Amt_Chng_Q4_Q1 (mean: 0.69 vs 0.77; 95% CI for difference: [-0.09, -0.07]). This confirms a strong statistical disparity between retained and departing customers."
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 1.06e-24 < 0.05, Cohen's d = -0.360, Small effect). Attrited customers exhibit on average lower Total_Amt_Chng_Q4_Q1 (mean: 0.69 vs 0.77; 95% CI for difference: [-0.09, -0.07]). This confirms a strong statistical disparity between retained and departing customers.",
+      "fdr_adjusted_p_value": 1.9515362347349222e-24,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "Credit_Limit",
@@ -499,7 +539,9 @@
       "rank_biserial_correlation": 0.08,
       "effect_size_label": "Negligible",
       "is_significant": true,
-      "interpretation": "Statistically significant difference (Mann-Whitney p = 3.01e-07 < 0.05, Cohen's d = -0.065, Negligible effect). Attrited customers exhibit on average lower Credit_Limit (mean: 8136.04 vs 8726.88; 95% CI for difference: [-1073.15, -108.52]). This confirms a strong statistical disparity between retained and departing customers."
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 3.01e-07 < 0.05, Cohen's d = -0.065, Negligible effect). Attrited customers exhibit on average lower Credit_Limit (mean: 8136.04 vs 8726.88; 95% CI for difference: [-1073.15, -108.52]). This confirms a strong statistical disparity between retained and departing customers.",
+      "fdr_adjusted_p_value": 5.090191769590734e-07,
+      "is_significant_fdr_0_05": true
     },
     {
       "feature": "Customer_Age",
@@ -520,7 +562,9 @@
       "rank_biserial_correlation": -0.0275,
       "effect_size_label": "Negligible",
       "is_significant": false,
-      "interpretation": "No statistically significant difference detected (Mann-Whitney p = 0.0781 >= 0.05, Cohen's d = 0.050). Means are comparable (46.66 vs 46.26)."
+      "interpretation": "No statistically significant difference detected (Mann-Whitney p = 0.0781 >= 0.05, Cohen's d = 0.050). Means are comparable (46.66 vs 46.26).",
+      "fdr_adjusted_p_value": 0.09545549295490938,
+      "is_significant_fdr_0_05": false
     },
     {
       "feature": "avg_trans_value",
@@ -541,7 +585,9 @@
       "rank_biserial_correlation": 0.0105,
       "effect_size_label": "Negligible",
       "is_significant": false,
-      "interpretation": "No statistically significant difference detected (Mann-Whitney p = 0.5034 >= 0.05, Cohen's d = 0.044). Means are comparable (63.59 vs 62.43)."
+      "interpretation": "No statistically significant difference detected (Mann-Whitney p = 0.5034 >= 0.05, Cohen's d = 0.044). Means are comparable (63.59 vs 62.43).",
+      "fdr_adjusted_p_value": 0.5252382797994759,
+      "is_significant_fdr_0_05": false
     },
     {
       "feature": "Months_on_book",
@@ -562,7 +608,9 @@
       "rank_biserial_correlation": -0.0239,
       "effect_size_label": "Negligible",
       "is_significant": false,
-      "interpretation": "No statistically significant difference detected (Mann-Whitney p = 0.1237 >= 0.05, Cohen's d = 0.037). Means are comparable (36.18 vs 35.88)."
+      "interpretation": "No statistically significant difference detected (Mann-Whitney p = 0.1237 >= 0.05, Cohen's d = 0.037). Means are comparable (36.18 vs 35.88).",
+      "fdr_adjusted_p_value": 0.13603388415381173,
+      "is_significant_fdr_0_05": false
     },
     {
       "feature": "Avg_Open_To_Buy",
@@ -583,7 +631,9 @@
       "rank_biserial_correlation": -0.0432,
       "effect_size_label": "Negligible",
       "is_significant": true,
-      "interpretation": "Statistically significant difference (Mann-Whitney p = 5.65e-03 < 0.05, Cohen's d = -0.001, Negligible effect). Attrited customers exhibit on average lower Avg_Open_To_Buy (mean: 7463.22 vs 7470.27; 95% CI for difference: [-490.01, 475.90]). This confirms a strong statistical disparity between retained and departing customers."
+      "interpretation": "Statistically significant difference (Mann-Whitney p = 5.65e-03 < 0.05, Cohen's d = -0.001, Negligible effect). Attrited customers exhibit on average lower Avg_Open_To_Buy (mean: 7463.22 vs 7470.27; 95% CI for difference: [-490.01, 475.90]). This confirms a strong statistical disparity between retained and departing customers.",
+      "fdr_adjusted_p_value": 0.008290137260612548,
+      "is_significant_fdr_0_05": true
     }
   ]
 }

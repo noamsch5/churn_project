@@ -10,7 +10,8 @@ import type {
   AnalyticsSummary,
 } from '../types/api';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+// Production uses the same origin as FastAPI; Vite proxies these paths locally.
+const API_BASE = import.meta.env.VITE_API_URL || '';
 
 export async function checkHealth(): Promise<{ status: string; models_loaded: boolean }> {
   const res = await fetch(`${API_BASE}/health`);

@@ -1,32 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Search,
   ChevronLeft,
   ChevronRight,
   ArrowUpDown,
 } from 'lucide-react';
-import type { CustomerRecord, CustomerListResponse } from '../types/api';
+import type { AnalyticsSummary, CustomerRecord, CustomerListResponse } from '../types/api';
 import { fetchCustomers } from '../services/api';
 
-export const CustomerExplorerView: React.FC = () => {
+interface CustomerExplorerViewProps {
+  summary: AnalyticsSummary | null;
+}
+
+export const CustomerExplorerView: React.FC<CustomerExplorerViewProps> = ({ summary }) => {
   const [data, setData] = useState<CustomerListResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
   const [pageSize] = useState<number>(20);
   const [search, setSearch] = useState<string>('');
+  const [submittedSearch, setSubmittedSearch] = useState<string>('');
   const [riskLevel, setRiskLevel] = useState<string>('');
   const [segment, setSegment] = useState<string>('');
   const [sortBy, setSortBy] = useState<string>('churn_probability');
   const [order, setOrder] = useState<string>('desc');
   const [selectedCustomer, setSelectedCustomer] = useState<CustomerRecord | null>(null);
 
-  const loadData = async () => {
-    setLoading(true);
+  const loadData = useCallback(async () => {
     try {
       const res = await fetchCustomers({
         page,
         page_size: pageSize,
-        search: search.trim() || undefined,
+        search: submittedSearch || undefined,
         risk_level: riskLevel || undefined,
         segment: segment || undefined,
         sort_by: sortBy,
@@ -38,16 +42,19 @@ export const CustomerExplorerView: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, pageSize, submittedSearch, riskLevel, segment, sortBy, order]);
 
   useEffect(() => {
-    loadData();
-  }, [page, riskLevel, segment, sortBy, order]);
+    void loadData();
+  }, [loadData]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setPage(1);
-    loadData();
+    setSubmittedSearch(search.trim());
+    if (page === 1 && submittedSearch === search.trim()) {
+      void loadData();
+    }
   };
 
   const toggleSort = (column: string) => {
@@ -64,8 +71,8 @@ export const CustomerExplorerView: React.FC = () => {
       <div className="page-intro">
         <h2 className="page-title">Customer Intelligence Explorer</h2>
         <p className="page-description">
-          Real-time queryable database of all 10,127 portfolio accounts scored with calibrated churn probabilities,
-          risk tiers, and K-Means segment assignments.
+          Demo scoring for all 10,127 portfolio accounts using churn risk scores and K-Means segments.
+          Rows marked “training in-sample” are not out-of-sample predictions; official metrics use only the holdout test set.
         </p>
       </div>
 
@@ -114,10 +121,9 @@ export const CustomerExplorerView: React.FC = () => {
               }}
             >
               <option value="">All Segments</option>
-              <option value="Accelerating Growth Customers">Accelerating Growth Customers</option>
-              <option value="High-Utilization Credit Revolvers">High-Utilization Credit Revolvers</option>
-              <option value="Disengaged & Underutilized (At-Risk)">Disengaged & Underutilized (At-Risk)</option>
-              <option value="High-Volume Power Spenders">High-Volume Power Spenders</option>
+              {summary?.segmentation.cluster_profiles.map((profile) => (
+                <option key={profile.cluster_id} value={profile.segment_name}>{profile.segment_name}</option>
+              ))}
             </select>
           </div>
 
@@ -197,7 +203,7 @@ export const CustomerExplorerView: React.FC = () => {
                     <td className="num-cell" style={{ fontWeight: 600 }}>
                       #{c.client_num}
                     </td>
-                    <td className="num-cell" style={{ fontWeight: 700, color: c.churn_probability > 0.5 ? '#ef4444' : '#10b981' }}>
+                    <td className="num-cell" style={{ fontWeight: 700, color: c.predicted_churn ? '#ef4444' : '#10b981' }}>
                       {(c.churn_probability * 100).toFixed(1)}%
                     </td>
                     <td>
@@ -278,10 +284,10 @@ export const CustomerExplorerView: React.FC = () => {
               </button>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+            <div className="customer-detail-grid">
               <div style={{ backgroundColor: '#f8fafc', padding: '0.75rem', borderRadius: 8 }}>
                 <span style={{ fontSize: '0.75rem', color: '#64748b', display: 'block' }}>Predicted Churn Risk</span>
-                <span style={{ fontSize: '1.5rem', fontWeight: 800, color: selectedCustomer.churn_probability > 0.5 ? '#ef4444' : '#10b981' }}>
+                <span style={{ fontSize: '1.5rem', fontWeight: 800, color: selectedCustomer.predicted_churn ? '#ef4444' : '#10b981' }}>
                   {(selectedCustomer.churn_probability * 100).toFixed(1)}%
                 </span>
                 <span className={`badge badge-${selectedCustomer.risk_level.toLowerCase()}`} style={{ marginTop: '0.25rem' }}>
@@ -323,6 +329,14 @@ export const CustomerExplorerView: React.FC = () => {
                 <strong style={{ color: selectedCustomer.actual_status === 'Attrited Customer' ? '#dc2626' : '#16a34a' }}>
                   {selectedCustomer.actual_status}
                 </strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.4rem 0' }}>
+                <span style={{ color: '#64748b' }}>Prediction Scope:</span>
+                <strong>{selectedCustomer.prediction_scope === 'holdout_test' ? 'Holdout test' : 'Training in-sample demo'}</strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.4rem 0' }}>
+                <span style={{ color: '#64748b' }}>Decision Threshold:</span>
+                <strong>{(selectedCustomer.threshold_applied * 100).toFixed(0)}%</strong>
               </div>
             </div>
           </div>

@@ -106,7 +106,7 @@ app.add_middleware(
 
 
 def get_risk_level(prob: float) -> str:
-    """Classify churn risk probability into business action tiers."""
+    """Classify the churn probability into descriptive, non-decision risk bands."""
     if prob < 0.25:
         return "Low"
     elif prob < 0.50:
@@ -155,12 +155,14 @@ def analytics_summary():
         "statistical_tests": artifacts["statistical_tests"],
         "model_performance": {
             "metrics": artifacts["model_metadata"]["metrics_default_threshold"],
-            "optimized_metrics": artifacts["model_metadata"]["metrics_optimized_threshold"],
+            "selected_threshold_metrics": artifacts["model_metadata"]["metrics_selected_threshold"],
             "baseline_metrics": artifacts["model_metadata"]["baseline_metrics"],
             "curves": artifacts["model_metadata"]["curves"],
             "threshold_sweep": artifacts["model_metadata"]["threshold_sweep"],
             "selected_threshold": artifacts["model_metadata"]["selected_threshold"],
+            "threshold_selection": artifacts["model_metadata"]["threshold_selection"],
             "coefficients": artifacts["model_metadata"]["all_coefficients"],
+            "odds_ratio_notes": artifacts["model_metadata"]["odds_ratio_notes"],
         },
         "segmentation": artifacts["cluster_profiles"],
     }
@@ -225,6 +227,8 @@ def list_customers(
             contacts_count=int(row["Contacts_Count_12_mon"]),
             credit_limit=float(row["Credit_Limit"]),
             utilization_ratio=float(row["Avg_Utilization_Ratio"]),
+            prediction_scope=str(row["prediction_scope"]),
+            threshold_applied=float(row["classification_threshold"]),
         )
         for _, row in sliced.iterrows()
     ]
@@ -331,56 +335,57 @@ def segment_customer(customer: CustomerInput):
 def analyze_customer(customer: CustomerInput):
     """
     Combined customer intelligence endpoint returning churn risk, behavioral cluster,
-    and key contributing factors.
+    and observed behavioral risk indicators.
     """
     churn_res = predict_churn(customer)
     segment_res = segment_customer(customer)
 
-    # Extract top contributing factors based on customer attributes
+    # These are transparent analysis-derived heuristics, not local model
+    # attribution values (for example, SHAP values).
     input_dict = customer.model_dump()
-    key_drivers = []
+    behavioral_risk_indicators = []
 
     if input_dict["Total_Trans_Ct"] < 50:
-        key_drivers.append({
+        behavioral_risk_indicators.append({
             "feature": "Total_Trans_Ct",
             "value": input_dict["Total_Trans_Ct"],
             "direction": "High Risk",
-            "message": "Low annual transaction count indicates declining card usage momentum.",
+            "message": "Low annual transaction count is associated with higher observed attrition.",
         })
     if input_dict["Total_Ct_Chng_Q4_Q1"] < 0.60:
-        key_drivers.append({
+        behavioral_risk_indicators.append({
             "feature": "Total_Ct_Chng_Q4_Q1",
             "value": input_dict["Total_Ct_Chng_Q4_Q1"],
             "direction": "High Risk",
             "message": "Transaction count declined by over 40% between Q1 and Q4.",
         })
     if input_dict["Months_Inactive_12_mon"] >= 3:
-        key_drivers.append({
+        behavioral_risk_indicators.append({
             "feature": "Months_Inactive_12_mon",
             "value": input_dict["Months_Inactive_12_mon"],
             "direction": "High Risk",
             "message": "Prolonged card dormancy (3+ months inactive) strongly correlates with attrition.",
         })
     if input_dict["Contacts_Count_12_mon"] >= 4:
-        key_drivers.append({
+        behavioral_risk_indicators.append({
             "feature": "Contacts_Count_12_mon",
             "value": input_dict["Contacts_Count_12_mon"],
             "direction": "High Risk",
             "message": "Elevated support contact frequency signals unresolved customer friction.",
         })
     if input_dict["Total_Relationship_Count"] <= 2:
-        key_drivers.append({
+        behavioral_risk_indicators.append({
             "feature": "Total_Relationship_Count",
             "value": input_dict["Total_Relationship_Count"],
             "direction": "High Risk",
-            "message": "Shallow product relationship leaves the customer susceptible to competitive offers.",
+            "message": "A shallow product relationship is associated with higher observed attrition.",
         })
     if input_dict["Total_Trans_Ct"] >= 75 and input_dict["Total_Revolving_Bal"] > 1000:
-        key_drivers.append({
+        behavioral_risk_indicators.append({
             "feature": "Total_Trans_Ct & Revolving_Bal",
             "value": f"{input_dict['Total_Trans_Ct']} trans / ${input_dict['Total_Revolving_Bal']} bal",
             "direction": "Protective",
-            "message": "High swipe volume and steady revolving balance protect customer retention.",
+            "message": "High swipe volume and a steady revolving balance are associated with lower observed attrition.",
         })
 
     return CombinedAnalysisResponse(
@@ -394,7 +399,7 @@ def analyze_customer(customer: CustomerInput):
         segment_name=segment_res.segment_name,
         segment_description=segment_res.description,
         recommended_strategy=segment_res.recommended_strategy,
-        key_drivers=key_drivers,
+        behavioral_risk_indicators=behavioral_risk_indicators,
     )
 
 

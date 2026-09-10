@@ -306,7 +306,7 @@ def create_nb_05():
         nbf.v4.new_markdown_cell("""# Notebook 05: Supervised Learning — Logistic Regression
 
 ## Credit Card Customer Churn & Segmentation
-**Objective:** Demonstrate baseline model evaluation, train Logistic Regression with balanced class weighting, perform Stratified 5-Fold Cross-Validation, optimize the classification threshold, compute business lift, and interpret odds ratios.
+**Objective:** Demonstrate baseline model evaluation, train Logistic Regression with balanced class weighting, perform Stratified 5-Fold Cross-Validation, select the classification threshold from out-of-fold training predictions, run one final holdout evaluation, compute business lift, and interpret odds ratios.
 
 ---
 ### The Accuracy Paradox
@@ -346,13 +346,13 @@ print("Model Training & Evaluation Completed.")"""),
         "ROC-AUC": meta["metrics_default_threshold"]["roc_auc"],
     },
     {
-        "Model": "Balanced Logistic Regression (Optimized)",
+        "Model": "Balanced Logistic Regression (Validation-Selected Threshold)",
         "Threshold": meta["selected_threshold"],
-        "Accuracy": meta["metrics_optimized_threshold"]["accuracy"],
-        "Precision": meta["metrics_optimized_threshold"]["precision"],
-        "Recall": meta["metrics_optimized_threshold"]["recall"],
-        "F1 Score": meta["metrics_optimized_threshold"]["f1"],
-        "ROC-AUC": meta["metrics_optimized_threshold"]["roc_auc"],
+        "Accuracy": meta["metrics_selected_threshold"]["accuracy"],
+        "Precision": meta["metrics_selected_threshold"]["precision"],
+        "Recall": meta["metrics_selected_threshold"]["recall"],
+        "F1 Score": meta["metrics_selected_threshold"]["f1"],
+        "ROC-AUC": meta["metrics_selected_threshold"]["roc_auc"],
     }
 ])
 comparison"""),
@@ -381,14 +381,14 @@ axes[1].legend()
 plt.tight_layout()
 plt.show()"""),
         nbf.v4.new_markdown_cell("""## 3. Threshold Analysis & Business Lift
-In banking, deciding which customers to contact requires balancing outreach budget against churn loss.
+The sweep below uses only 5-fold out-of-fold predictions from the training partition. The selected threshold is fixed before the untouched holdout test is evaluated. In banking, deciding which customers to contact requires balancing outreach budget against churn loss.
 - At the **top 10% risk decile**, precision is **84.16%** with a **5.25x Lift**, capturing **52.3%** of all churners in just 10% of customer accounts."""),
         nbf.v4.new_code_cell("""sweep_df = pd.DataFrame(meta["threshold_sweep"])
 plt.figure(figsize=(10, 5))
 plt.plot(sweep_df["threshold"], sweep_df["precision"], label="Precision", color='#2563eb')
 plt.plot(sweep_df["threshold"], sweep_df["recall"], label="Recall", color='#dc2626')
 plt.plot(sweep_df["threshold"], sweep_df["f1"], label="F1 Score", color='#16a34a', lw=2)
-plt.axvline(meta["selected_threshold"], color='black', linestyle=':', label=f"Optimal F1 Threshold ({meta['selected_threshold']})")
+plt.axvline(meta["selected_threshold"], color='black', linestyle=':', label=f"Validation-selected F1 threshold ({meta['selected_threshold']})")
 plt.xlabel("Classification Threshold")
 plt.ylabel("Score")
 plt.title("Precision, Recall, and F1 across Classification Thresholds")
@@ -396,7 +396,7 @@ plt.legend()
 plt.tight_layout()
 plt.show()"""),
         nbf.v4.new_markdown_cell("""## 4. Odds Ratio Interpretation
-Each unit increase in a standardized feature multiplies the odds of churn by $e^{\\beta}$."""),
+For numerical features, each one-standard-deviation increase multiplies the odds of churn by $e^{\\beta}$. For categorical one-hot features, the odds ratio compares that category with the omitted reference category. Reference categories are stored in the model metadata."""),
         nbf.v4.new_code_cell("""top_drivers = pd.DataFrame(meta["all_coefficients"])
 print("Top 5 Features Increasing Churn Risk:")
 display(top_drivers[top_drivers["coefficient"] > 0].head(5))
@@ -426,10 +426,10 @@ import json
 from src.models.train_clustering import train_clustering_and_pca
 from src.utils.helpers import MODELS_DIR
 
-meta = train_clustering_and_pca(optimal_k=4)
+meta = train_clustering_and_pca(selected_k=4)
 print("Customer Segmentation & PCA Pipeline Completed.")"""),
-        nbf.v4.new_markdown_cell("""## 1. Optimal K Selection: Elbow & Silhouette
-We evaluate $k \\in [2, 6]$ on standardized clustering features."""),
+        nbf.v4.new_markdown_cell("""## 1. K Selection: Elbow, Silhouette, and Business Usefulness
+We evaluate $k \\in [2, 6]$ on standardized clustering features. **k=2 has the highest Silhouette score**, so k=4 is not presented as an unambiguous quantitative optimum. Selected k = 4 for business interpretability after considering the elbow pattern, cluster sizes, distinct profile interpretability, and usefulness for differentiated retention strategies."""),
         nbf.v4.new_code_cell("""k_eval_df = pd.DataFrame(meta["k_evaluation"])
 fig, ax1 = plt.subplots(figsize=(8, 4))
 

@@ -55,11 +55,11 @@ def test_model_info_endpoint():
 
 
 def test_clusters_endpoint():
-    """Verify /clusters returns optimal_k, profiles, and PCA loadings."""
+    """Verify /clusters returns the selected k, profiles, and PCA loadings."""
     response = client.get("/clusters")
     assert response.status_code == 200
     data = response.json()
-    assert data["optimal_k"] == 4
+    assert data["selected_k"] == 4
     assert len(data["cluster_profiles"]) == 4
 
 
@@ -111,4 +111,16 @@ def test_analyze_customer_endpoint():
     data = response.json()
     assert "churn_probability" in data
     assert "segment_name" in data
-    assert "key_drivers" in data
+    assert "behavioral_risk_indicators" in data
+
+
+def test_threshold_is_validation_selected_and_consistent():
+    """The API and exported predictions must use the training-CV threshold."""
+    metadata = client.get("/model-info").json()
+    assert metadata["threshold_selection"]["test_set_used_for_selection"] is False
+    response = client.post("/predict", json=SAMPLE_CUSTOMER).json()
+    assert response["threshold_applied"] == metadata["selected_threshold"]
+
+    customer = client.get("/customers?page=1&page_size=5").json()["customers"][0]
+    assert customer["threshold_applied"] == metadata["selected_threshold"]
+    assert customer["prediction_scope"] in {"holdout_test", "training_in_sample_demo"}

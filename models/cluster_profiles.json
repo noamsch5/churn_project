@@ -26,7 +26,17 @@
       "silhouette_score": 0.1435
     }
   ],
-  "optimal_k": 4,
+  "selected_k": 4,
+  "selection_statement": "Selected k = 4 for business interpretability after evaluating k=2\u20136.",
+  "selection_rationale": {
+    "silhouette_note": "k=2 has the highest Silhouette score; k=4 was not selected as an unambiguous quantitative optimum.",
+    "criteria": [
+      "elbow pattern",
+      "interpretability",
+      "cluster sizes",
+      "business usefulness"
+    ]
+  },
   "clustering_features": [
     "Total_Trans_Amt",
     "Total_Trans_Ct",
@@ -56,9 +66,9 @@
       "avg_relationship_count": 4.47,
       "avg_credit_limit": 9555.04,
       "avg_utilization_ratio": 0.219,
-      "segment_name": "Accelerating Growth Customers",
-      "description": "Expanding account activity with positive transaction change (>100% Q4/Q1), deep banking relationships (4.5 products), and lowest churn (5.4%).",
-      "strategy": "Multi-product cross-selling (mortgages, investments) and premium card tier upgrades."
+      "segment_name": "Relationship-Rich Growth Customers",
+      "description": "Relationship-rich segment averaging 4.5 products, a 1.096 Q4/Q1 transaction-amount ratio, and 5.4% observed churn.",
+      "strategy": "Use relevant cross-sell offers and evaluate eligibility for premium card tiers."
     },
     {
       "cluster_id": 1,
@@ -78,8 +88,8 @@
       "avg_credit_limit": 2871.15,
       "avg_utilization_ratio": 0.602,
       "segment_name": "High-Utilization Credit Revolvers",
-      "description": "Consistent credit borrowers with high utilization (~60%) and steady card reliance, generating strong interest revenue with low churn (8.1%).",
-      "strategy": "Credit line increases, low-APR promotional balance transfers, and payment automation tools."
+      "description": "Highest-utilization remaining segment (60.2%), averaging 67.1 annual transactions and 8.1% observed churn.",
+      "strategy": "Consider credit-line reviews, low-APR offers, and payment automation tools."
     },
     {
       "cluster_id": 2,
@@ -99,8 +109,8 @@
       "avg_credit_limit": 10648.63,
       "avg_utilization_ratio": 0.087,
       "segment_name": "Disengaged & Underutilized (At-Risk)",
-      "description": "Underutilized credit line (<9% utilization), sharp drops in quarterly activity, elevated bank contacts, and high attrition (26.9%).",
-      "strategy": "Targeted win-back campaigns, proactive card usage incentives, fee waivers, and contact resolution."
+      "description": "Highest observed-churn segment (26.9%), with 8.7% average utilization, a 0.617 Q4/Q1 transaction-count ratio, and 2.7 annual contacts.",
+      "strategy": "Targeted win-back campaigns, card-usage incentives, fee reviews, and contact resolution."
     },
     {
       "cluster_id": 3,
@@ -120,8 +130,8 @@
       "avg_credit_limit": 15049.27,
       "avg_utilization_ratio": 0.152,
       "segment_name": "High-Volume Power Spenders",
-      "description": "Premium card transactors with high transaction frequency, large spend volumes (~$10k/yr), and strong loyalty.",
-      "strategy": "Exclusive concierge perks, tier status retention, premium partner rewards."
+      "description": "Highest-spend segment, averaging $11,666 and 99.7 transactions annually; observed churn is 9.6%.",
+      "strategy": "Exclusive concierge perks, tier status retention, and premium partner rewards."
     }
   ],
   "pca": {
@@ -283,7 +293,7 @@
         "pc1": -0.361,
         "pc2": 1.025,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.4601,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -433,7 +443,7 @@
         "pc1": -1.494,
         "pc2": 0.022,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1081,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -533,7 +543,7 @@
         "pc1": 0.307,
         "pc2": 0.464,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0877,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -543,7 +553,7 @@
         "pc1": -1.73,
         "pc2": 2.905,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.2204,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -563,7 +573,7 @@
         "pc1": -1.166,
         "pc2": 0.204,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0488,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -613,7 +623,7 @@
         "pc1": -0.861,
         "pc2": 2.699,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0219,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -623,7 +633,7 @@
         "pc1": -0.486,
         "pc2": 0.588,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0429,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -773,7 +783,7 @@
         "pc1": -0.149,
         "pc2": 0.415,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0594,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -1033,7 +1043,7 @@
         "pc1": -0.257,
         "pc2": 1.083,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0713,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -1053,7 +1063,7 @@
         "pc1": 0.29,
         "pc2": 0.999,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0129,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -1163,7 +1173,7 @@
         "pc1": 0.1,
         "pc2": 0.93,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0482,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -1233,7 +1243,7 @@
         "pc1": -1.844,
         "pc2": 1.355,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.7365,
         "actual_churn": 0,
         "risk_level": "High"
@@ -1243,7 +1253,7 @@
         "pc1": -0.783,
         "pc2": 1.247,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0257,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -1283,7 +1293,7 @@
         "pc1": -0.801,
         "pc2": 3.568,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.423,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -1333,7 +1343,7 @@
         "pc1": 0.045,
         "pc2": -0.806,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0847,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -1353,7 +1363,7 @@
         "pc1": -0.609,
         "pc2": -0.227,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0346,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -1383,7 +1393,7 @@
         "pc1": 0.087,
         "pc2": 0.409,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0581,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -1523,7 +1533,7 @@
         "pc1": -0.395,
         "pc2": 2.199,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0108,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -1583,7 +1593,7 @@
         "pc1": 0.235,
         "pc2": 0.337,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0181,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -1613,7 +1623,7 @@
         "pc1": -1.167,
         "pc2": 3.367,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0041,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -1823,7 +1833,7 @@
         "pc1": -0.974,
         "pc2": 1.738,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0101,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -1833,7 +1843,7 @@
         "pc1": 1.11,
         "pc2": 0.651,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.051,
         "actual_churn": 1,
         "risk_level": "Low"
@@ -1843,7 +1853,7 @@
         "pc1": -0.176,
         "pc2": 1.145,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1361,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -1943,7 +1953,7 @@
         "pc1": -1.866,
         "pc2": 1.499,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.6843,
         "actual_churn": 0,
         "risk_level": "High"
@@ -2163,7 +2173,7 @@
         "pc1": -1.119,
         "pc2": 0.323,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0716,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -2343,7 +2353,7 @@
         "pc1": -0.986,
         "pc2": 2.82,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0479,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -2353,7 +2363,7 @@
         "pc1": -1.222,
         "pc2": 3.288,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0339,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -2393,7 +2403,7 @@
         "pc1": 0.441,
         "pc2": -1.261,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0841,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -2663,7 +2673,7 @@
         "pc1": -0.712,
         "pc2": 0.647,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1602,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -2683,7 +2693,7 @@
         "pc1": -1.049,
         "pc2": 0.651,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.2372,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -2723,7 +2733,7 @@
         "pc1": -0.508,
         "pc2": -0.807,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.029,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -2743,7 +2753,7 @@
         "pc1": -0.077,
         "pc2": 0.659,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0032,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -2773,7 +2783,7 @@
         "pc1": -0.551,
         "pc2": 1.664,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0652,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -2963,7 +2973,7 @@
         "pc1": -1.098,
         "pc2": -1.064,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.3975,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -3023,7 +3033,7 @@
         "pc1": -0.33,
         "pc2": 0.424,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0058,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -3083,7 +3093,7 @@
         "pc1": -0.805,
         "pc2": 1.067,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0809,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -3113,7 +3123,7 @@
         "pc1": -0.799,
         "pc2": 0.93,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0935,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -3213,7 +3223,7 @@
         "pc1": -1.615,
         "pc2": 0.789,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.2836,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -3223,7 +3233,7 @@
         "pc1": -1.312,
         "pc2": 1.132,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0028,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -3253,7 +3263,7 @@
         "pc1": -1.135,
         "pc2": 5.185,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0016,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -3323,7 +3333,7 @@
         "pc1": -0.139,
         "pc2": 0.768,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0232,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -3493,7 +3503,7 @@
         "pc1": 0.325,
         "pc2": 0.503,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0366,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -3523,7 +3533,7 @@
         "pc1": -0.685,
         "pc2": 0.899,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0019,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -3543,7 +3553,7 @@
         "pc1": 0.496,
         "pc2": -0.362,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0024,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -3563,7 +3573,7 @@
         "pc1": -1.344,
         "pc2": 2.257,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0276,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -3703,7 +3713,7 @@
         "pc1": -0.252,
         "pc2": 2.697,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0277,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -3803,7 +3813,7 @@
         "pc1": 0.472,
         "pc2": 0.804,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0085,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -3813,7 +3823,7 @@
         "pc1": 0.558,
         "pc2": -0.074,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.097,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -3823,7 +3833,7 @@
         "pc1": -0.357,
         "pc2": 1.282,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0352,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -3863,7 +3873,7 @@
         "pc1": -1.718,
         "pc2": 0.837,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.5821,
         "actual_churn": 0,
         "risk_level": "High"
@@ -3963,7 +3973,7 @@
         "pc1": -0.175,
         "pc2": 0.47,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.3116,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -4043,7 +4053,7 @@
         "pc1": 0.387,
         "pc2": -0.555,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0154,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -4143,7 +4153,7 @@
         "pc1": -1.048,
         "pc2": 0.205,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.4385,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -4313,7 +4323,7 @@
         "pc1": 0.883,
         "pc2": -0.085,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.7528,
         "actual_churn": 0,
         "risk_level": "Critical"
@@ -4423,7 +4433,7 @@
         "pc1": -0.614,
         "pc2": -0.311,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.3279,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -4463,7 +4473,7 @@
         "pc1": -0.428,
         "pc2": 2.385,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0963,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -4563,7 +4573,7 @@
         "pc1": -1.316,
         "pc2": 2.172,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0155,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -4583,7 +4593,7 @@
         "pc1": -0.632,
         "pc2": 3.339,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.9521,
         "actual_churn": 0,
         "risk_level": "Critical"
@@ -4623,7 +4633,7 @@
         "pc1": -0.243,
         "pc2": 1.002,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0161,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -4803,7 +4813,7 @@
         "pc1": 0.777,
         "pc2": -0.982,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0061,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -4863,7 +4873,7 @@
         "pc1": 0.577,
         "pc2": 0.853,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0796,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -4933,7 +4943,7 @@
         "pc1": -0.803,
         "pc2": 1.269,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0127,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -5073,7 +5083,7 @@
         "pc1": 1.776,
         "pc2": -0.424,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0951,
         "actual_churn": 1,
         "risk_level": "Low"
@@ -5173,7 +5183,7 @@
         "pc1": 1.079,
         "pc2": 1.312,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.5825,
         "actual_churn": 1,
         "risk_level": "High"
@@ -5433,7 +5443,7 @@
         "pc1": -1.705,
         "pc2": 0.583,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.3151,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -5473,7 +5483,7 @@
         "pc1": -1.073,
         "pc2": -1.699,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.7458,
         "actual_churn": 0,
         "risk_level": "High"
@@ -5663,7 +5673,7 @@
         "pc1": -0.779,
         "pc2": -1.131,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0777,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -5813,7 +5823,7 @@
         "pc1": -0.752,
         "pc2": 1.922,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1495,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -5843,7 +5853,7 @@
         "pc1": -1.511,
         "pc2": 1.136,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.4285,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -5873,7 +5883,7 @@
         "pc1": -1.234,
         "pc2": 3.016,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0593,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -5883,7 +5893,7 @@
         "pc1": -0.845,
         "pc2": 3.185,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0701,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -5943,7 +5953,7 @@
         "pc1": -0.003,
         "pc2": -0.05,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0318,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -5983,7 +5993,7 @@
         "pc1": -0.405,
         "pc2": 0.466,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.5664,
         "actual_churn": 0,
         "risk_level": "High"
@@ -6003,7 +6013,7 @@
         "pc1": -1.496,
         "pc2": 2.521,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0412,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -6023,7 +6033,7 @@
         "pc1": -0.279,
         "pc2": 0.954,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0441,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -6163,7 +6173,7 @@
         "pc1": -1.759,
         "pc2": 1.767,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.2755,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -6203,7 +6213,7 @@
         "pc1": 0.757,
         "pc2": 0.283,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.9385,
         "actual_churn": 1,
         "risk_level": "Critical"
@@ -6283,7 +6293,7 @@
         "pc1": -0.823,
         "pc2": 5.277,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1709,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -6413,7 +6423,7 @@
         "pc1": -0.642,
         "pc2": -0.044,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.3948,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -6493,7 +6503,7 @@
         "pc1": -0.387,
         "pc2": 0.779,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.09,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -6743,7 +6753,7 @@
         "pc1": -0.287,
         "pc2": 0.186,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0111,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -6823,7 +6833,7 @@
         "pc1": -1.518,
         "pc2": 0.406,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.3971,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -6893,7 +6903,7 @@
         "pc1": -0.194,
         "pc2": 0.093,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.2418,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -6983,7 +6993,7 @@
         "pc1": -0.328,
         "pc2": 0.703,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0231,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7043,7 +7053,7 @@
         "pc1": -0.773,
         "pc2": 3.111,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0501,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7083,7 +7093,7 @@
         "pc1": -1.476,
         "pc2": 0.249,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0778,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7133,7 +7143,7 @@
         "pc1": -0.959,
         "pc2": 1.255,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1145,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7193,7 +7203,7 @@
         "pc1": -0.211,
         "pc2": 0.723,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0094,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7343,7 +7353,7 @@
         "pc1": -0.328,
         "pc2": -0.232,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1934,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7393,7 +7403,7 @@
         "pc1": -0.63,
         "pc2": 1.927,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0047,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7423,7 +7433,7 @@
         "pc1": -1.218,
         "pc2": 1.245,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0119,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7433,7 +7443,7 @@
         "pc1": -0.621,
         "pc2": 0.975,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0474,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7443,7 +7453,7 @@
         "pc1": -1.395,
         "pc2": 1.594,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1882,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7493,7 +7503,7 @@
         "pc1": -1.296,
         "pc2": 2.257,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0779,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7553,7 +7563,7 @@
         "pc1": -0.073,
         "pc2": 1.273,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0847,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7563,7 +7573,7 @@
         "pc1": -1.362,
         "pc2": 2.925,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1667,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7643,7 +7653,7 @@
         "pc1": -0.3,
         "pc2": 0.14,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1948,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7713,7 +7723,7 @@
         "pc1": -1.459,
         "pc2": 0.452,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0711,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7733,7 +7743,7 @@
         "pc1": -0.633,
         "pc2": 0.061,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1499,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7783,7 +7793,7 @@
         "pc1": 0.442,
         "pc2": -1.211,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0122,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7833,7 +7843,7 @@
         "pc1": 0.371,
         "pc2": 1.526,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0028,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -7943,7 +7953,7 @@
         "pc1": 0.268,
         "pc2": 1.778,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0217,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -8043,7 +8053,7 @@
         "pc1": 0.345,
         "pc2": 0.55,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0401,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -8103,7 +8113,7 @@
         "pc1": -0.767,
         "pc2": 0.307,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0964,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -8173,7 +8183,7 @@
         "pc1": -1.688,
         "pc2": 2.009,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.9901,
         "actual_churn": 0,
         "risk_level": "Critical"
@@ -8243,7 +8253,7 @@
         "pc1": 0.379,
         "pc2": 0.996,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1872,
         "actual_churn": 1,
         "risk_level": "Low"
@@ -8363,7 +8373,7 @@
         "pc1": 0.382,
         "pc2": 1.622,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0021,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -8403,7 +8413,7 @@
         "pc1": -0.695,
         "pc2": -0.555,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.03,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -8443,7 +8453,7 @@
         "pc1": 0.036,
         "pc2": 0.346,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.2798,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -8453,7 +8463,7 @@
         "pc1": -0.154,
         "pc2": 4.608,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0069,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -8503,7 +8513,7 @@
         "pc1": -0.308,
         "pc2": 0.58,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.035,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -8603,7 +8613,7 @@
         "pc1": -0.641,
         "pc2": -0.196,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0211,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -8803,7 +8813,7 @@
         "pc1": 0.521,
         "pc2": 2.442,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0075,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -8823,7 +8833,7 @@
         "pc1": 0.506,
         "pc2": 0.135,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0058,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -8833,7 +8843,7 @@
         "pc1": -1.656,
         "pc2": 3.692,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0318,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -8943,7 +8953,7 @@
         "pc1": -0.172,
         "pc2": -0.502,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0135,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -8963,7 +8973,7 @@
         "pc1": 1.011,
         "pc2": 0.169,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1147,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -9053,7 +9063,7 @@
         "pc1": -1.551,
         "pc2": 2.286,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.2618,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -9093,7 +9103,7 @@
         "pc1": -0.76,
         "pc2": 0.838,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1289,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -9153,7 +9163,7 @@
         "pc1": -0.703,
         "pc2": 5.84,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0234,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -9273,7 +9283,7 @@
         "pc1": 0.361,
         "pc2": 0.284,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0558,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -9333,7 +9343,7 @@
         "pc1": -1.104,
         "pc2": 0.413,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0787,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -9353,7 +9363,7 @@
         "pc1": 0.357,
         "pc2": 1.236,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0397,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -9393,7 +9403,7 @@
         "pc1": -0.297,
         "pc2": 2.676,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0133,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -9433,7 +9443,7 @@
         "pc1": -0.838,
         "pc2": 0.326,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.1936,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -9503,7 +9513,7 @@
         "pc1": 0.526,
         "pc2": 0.221,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0089,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -9673,7 +9683,7 @@
         "pc1": -1.67,
         "pc2": 0.247,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.3657,
         "actual_churn": 0,
         "risk_level": "Medium"
@@ -9683,7 +9693,7 @@
         "pc1": 0.05,
         "pc2": 1.129,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.7186,
         "actual_churn": 0,
         "risk_level": "High"
@@ -9753,7 +9763,7 @@
         "pc1": 0.338,
         "pc2": 0.644,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0132,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -9803,7 +9813,7 @@
         "pc1": -1.179,
         "pc2": 1.056,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.2233,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -9853,7 +9863,7 @@
         "pc1": -1.937,
         "pc2": 1.528,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.219,
         "actual_churn": 0,
         "risk_level": "Low"
@@ -9993,7 +10003,7 @@
         "pc1": -0.823,
         "pc2": 2.017,
         "cluster_id": 0,
-        "segment_name": "Accelerating Growth Customers",
+        "segment_name": "Relationship-Rich Growth Customers",
         "churn_prob": 0.0801,
         "actual_churn": 0,
         "risk_level": "Low"

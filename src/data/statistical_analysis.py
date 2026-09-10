@@ -9,6 +9,7 @@ import json
 import numpy as np
 import pandas as pd
 from scipy import stats
+from statsmodels.stats.multitest import multipletests
 
 from src.utils.helpers import (
     RAW_DATA_FILE,
@@ -287,11 +288,30 @@ def run_and_save_analysis():
 
     cat_tests = run_categorical_tests(df_feat)
     num_tests = run_numerical_tests(df_feat)
+
+    # Control the expected false discovery rate across the full family of primary
+    # tests (categorical chi-square + numerical Mann-Whitney) with Benjamini-Hochberg.
+    primary_p_values = [r["p_value"] for r in cat_tests] + [
+        r["mann_whitney_p_value"] for r in num_tests
+    ]
+    rejected, adjusted_p_values, _, _ = multipletests(
+        primary_p_values, alpha=0.05, method="fdr_bh"
+    )
+    all_results = cat_tests + num_tests
+    for result, is_rejected, adjusted_p in zip(all_results, rejected, adjusted_p_values):
+        result["fdr_adjusted_p_value"] = float(adjusted_p)
+        result["is_significant_fdr_0_05"] = bool(is_rejected)
     eda = generate_eda_summary(df_feat)
 
     PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
     statistical_report = {
+        "multiple_testing": {
+            "method": "Benjamini-Hochberg false discovery rate correction",
+            "alpha": 0.05,
+            "family_size": len(primary_p_values),
+            "primary_tests": "Categorical chi-square and numerical Mann-Whitney tests",
+        },
         "categorical_tests": cat_tests,
         "numerical_tests": num_tests,
     }

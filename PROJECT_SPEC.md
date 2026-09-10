@@ -764,11 +764,11 @@ All 31 development stages specified in this document have been completed and val
 3. **Data Dictionary**: Generated and documented in [`DATA_DICTIONARY.md`](file:///Users/noamschwartz/churn_project/data/processed/DATA_DICTIONARY.md).
 4. **Statistical Hypothesis Testing**: Rigorous evaluation of H1–H7 via Welch's t-tests, Mann-Whitney U, and Chi-Square tests of independence with Cramér's V and Cohen's d effect sizes (`src/data/statistical_analysis.py`).
 5. **Zero-Leakage Preprocessing**: Stratified 80/20 split, `FeatureEngineer` and `ColumnTransformer` fitted exclusively on training data (`src/data/preprocess.py`, `src/features/build_features.py`).
-6. **Supervised Learning**: Baseline Dummy Classifier vs Balanced Logistic Regression (5-fold Stratified CV: ROC-AUC = 0.934, Recall = 82.8% at default threshold; F1 = 0.713 at optimal 0.75 threshold; Top-10% Lift = 5.25x).
+6. **Supervised Learning**: Baseline Dummy Classifier vs Balanced Logistic Regression. The 0.72 decision threshold is selected from five-fold out-of-fold training predictions; final holdout results are ROC-AUC = 0.934, Recall = 69.2%, F1 = 0.704, and Top-10% Lift = 5.25x.
 7. **Model Interpretation**: Standardized coefficients and odds ratios ($e^\beta$) calculated and ranked (`models/model_metadata.json`).
-8. **Unsupervised Customer Segmentation**: Standardized K-Means with optimal $k=4$, validated via Elbow and Silhouette scores. Post-hoc profiling reveals distinct churn variance from 5.4% to 26.9% (`src/models/train_clustering.py`).
+8. **Unsupervised Customer Segmentation**: Standardized K-Means with selected $k=4$ after evaluating $k=2$–$6$. Although $k=2$ has the highest Silhouette score, $k=4$ was chosen after also considering the elbow pattern, interpretability, cluster sizes, and business usefulness. Post-hoc profiling reveals observed churn rates from 5.4% to 26.9% (`src/models/train_clustering.py`).
 9. **PCA Dimensionality Reduction**: 2D projection capturing 40.3% of variance with component loadings analysis.
-10. **Combined Customer Intelligence**: Unified dataset with customer IDs, calibrated churn probabilities, risk levels, and segment tags (`data/processed/customer_intelligence.csv`).
+10. **Combined Customer Intelligence**: Unified dataset with customer IDs, churn risk scores, risk levels, segment tags, the applied 0.72 threshold, and explicit holdout-vs-training prediction scope (`data/processed/customer_intelligence.csv`).
 11. **6 Analytical Notebooks**: Educational notebooks covering the full lifecycle (`notebooks/01` through `06`).
 12. **FastAPI Backend**: Serving `/health`, `/model-info`, `/clusters`, `/analytics-summary`, `/customers`, `/predict`, `/segment`, `/analyze-customer` (`api/main.py`).
 13. **React + TypeScript + Vite Frontend**: High-density banking analytics dashboard with live simulator, dynamic threshold slider, segment breakdowns, statistical tables, and searchable customer explorer (`frontend/`).

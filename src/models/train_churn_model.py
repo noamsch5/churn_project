@@ -1,7 +1,8 @@
 """
 Supervised learning module for Credit Card Churn Prediction.
 Trains Dummy Classifier baseline, standard Logistic Regression, and balanced Logistic Regression.
-Evaluates cross-validation, holdout test metrics, threshold optimization, and odds-ratio interpretations.
+Evaluates cross-validation, validation-based threshold selection, one final holdout
+test evaluation, and odds-ratio interpretations.
 """
 
 from pathlib import Path
@@ -11,7 +12,7 @@ import numpy as np
 import pandas as pd
 from sklearn.dummy import DummyClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import StratifiedKFold, cross_validate
+from sklearn.model_selection import StratifiedKFold, cross_val_predict, cross_validate
 from sklearn.pipeline import Pipeline
 
 from src.utils.helpers import (
@@ -34,7 +35,7 @@ from src.features.build_features import FeatureEngineer
 from src.evaluation.metrics import (
     compute_classification_metrics,
     compute_curve_points,
-    find_optimal_threshold,
+    select_threshold,
 )
 
 logger = get_logger(__name__)
@@ -72,7 +73,6 @@ def train_and_evaluate_churn_model() -> dict:
 
     # Pre-transform training features for cross-validation and inspection
     X_train_fe = fe.fit_transform(X_train)
-    X_test_fe = fe.transform(X_test)
 
     # -------------------------------------------------------------
     # 1. Dummy Baseline Classifier (Most Frequent)
@@ -123,26 +123,38 @@ def train_and_evaluate_churn_model() -> dict:
     )
 
     # We select the balanced model or standard model based on operational retention goals
-    # Balanced weights provide higher sensitivity (recall) at default threshold,
-    # or threshold optimization on standard model produces fine-grained calibration.
+    # Balanced weights provide higher sensitivity (recall) at the default threshold.
     # We train balanced Logistic Regression as our primary model for superior default recall.
     selected_pipeline = pipe_balanced
+
+    # Select the operating threshold exclusively from out-of-fold predictions on
+    # the training partition. Every row is scored by a model that did not train on
+    # that row; the untouched test set plays no role in threshold selection.
+    logger.info("Selecting decision threshold from 5-fold out-of-fold training predictions...")
+    oof_train_probs = cross_val_predict(
+        selected_pipeline,
+        X_train,
+        y_train,
+        cv=cv,
+        method="predict_proba",
+    )[:, 1]
+    selected_threshold, threshold_sweep = select_threshold(
+        y_train.values, oof_train_probs, metric="f1"
+    )
+
+    # Fit once on all training data only after model and threshold decisions are fixed.
     selected_pipeline.fit(X_train, y_train)
 
     # -------------------------------------------------------------
-    # 3. Holdout Test Set Evaluation
+    # 3. One Final Holdout Test Set Evaluation
     # -------------------------------------------------------------
     y_test_probs = selected_pipeline.predict_proba(X_test)[:, 1]
 
     # Evaluate at default threshold 0.50
     default_metrics = compute_classification_metrics(y_test.values, y_test_probs, threshold=0.50)
 
-    # Threshold optimization sweep (0.05 to 0.95)
-    best_threshold, threshold_sweep = find_optimal_threshold(
-        y_test.values, y_test_probs, metric="f1"
-    )
-    optimized_metrics = compute_classification_metrics(
-        y_test.values, y_test_probs, threshold=best_threshold
+    selected_threshold_metrics = compute_classification_metrics(
+        y_test.values, y_test_probs, threshold=selected_threshold
     )
 
     curve_points = compute_curve_points(y_test.values, y_test_probs)
@@ -167,13 +179,24 @@ def train_and_evaluate_churn_model() -> dict:
     positive_drivers = coef_df[coef_df["coefficient"] > 0].to_dict(orient="records")
     negative_drivers = coef_df[coef_df["coefficient"] < 0].sort_values("coefficient", ascending=True).to_dict(orient="records")
 
-    # Format clean list for JSON
+    ohe = fitted_prep.named_transformers_["cat"].named_steps["ohe"]
+    categorical_reference_categories = {
+        feature: str(categories[0])
+        for feature, categories in zip(CATEGORICAL_FEATURES, ohe.categories_)
+    }
+
+    # Format clean list for JSON, including the correct odds-ratio comparison unit.
     ranked_coefficients = [
         {
             "feature": row["feature"],
             "coefficient": round(float(row["coefficient"]), 4),
             "odds_ratio": round(float(row["odds_ratio"]), 4),
-            "impact": "Increases Churn Risk" if row["coefficient"] > 0 else "Protects Retention",
+            "impact": "Positive association with churn odds" if row["coefficient"] > 0 else "Negative association with churn odds",
+            "comparison_basis": (
+                "one standard deviation increase"
+                if row["feature"] in ALL_NUMERICAL_FEATURES
+                else "category indicator versus the feature's reference category"
+            ),
         }
         for _, row in coef_df.iterrows()
     ]
@@ -193,10 +216,17 @@ def train_and_evaluate_churn_model() -> dict:
         "solver": "lbfgs",
         "class_weight": "balanced",
         "random_state": RANDOM_STATE,
-        "selected_threshold": best_threshold,
+        "selected_threshold": selected_threshold,
         "default_threshold": 0.50,
         "metrics_default_threshold": default_metrics,
-        "metrics_optimized_threshold": optimized_metrics,
+        "metrics_selected_threshold": selected_threshold_metrics,
+        "evaluation_scope": "untouched_holdout_test",
+        "test_set_size": int(len(y_test)),
+        "threshold_selection": {
+            "source": "5-fold out-of-fold predictions on the training partition",
+            "metric": "f1",
+            "test_set_used_for_selection": False,
+        },
         "baseline_metrics": dummy_metrics,
         "cross_validation": {
             "standard_logreg": {
@@ -216,6 +246,12 @@ def train_and_evaluate_churn_model() -> dict:
         },
         "curves": curve_points,
         "threshold_sweep": threshold_sweep,
+        "threshold_sweep_scope": "out_of_fold_training_predictions",
+        "odds_ratio_notes": {
+            "numerical_features": "Odds ratios represent a one-standard-deviation increase because numerical inputs are StandardScaled.",
+            "categorical_features": "Odds ratios compare each one-hot category with the omitted reference category.",
+            "categorical_reference_categories": categorical_reference_categories,
+        },
         "top_churn_drivers": positive_drivers[:10],
         "top_retention_drivers": negative_drivers[:10],
         "all_coefficients": ranked_coefficients,
@@ -234,6 +270,6 @@ if __name__ == "__main__":
     print("Supervised churn model successfully trained and evaluated.")
     print("ROC-AUC:", meta["metrics_default_threshold"]["roc_auc"])
     print("Recall (Default 0.50):", meta["metrics_default_threshold"]["recall"])
-    print("Recall (Optimized):", meta["metrics_optimized_threshold"]["recall"])
-    print("F1 (Optimized):", meta["metrics_optimized_threshold"]["f1"])
-    print("Optimal Threshold:", meta["selected_threshold"])
+    print("Recall (Selected Threshold):", meta["metrics_selected_threshold"]["recall"])
+    print("F1 (Selected Threshold):", meta["metrics_selected_threshold"]["f1"])
+    print("Validation-Selected Threshold:", meta["selected_threshold"])

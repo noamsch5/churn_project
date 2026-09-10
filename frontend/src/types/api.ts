@@ -41,7 +41,7 @@ export interface SegmentResponse {
   segment_churn_rate_pct: number;
 }
 
-export interface KeyDriver {
+export interface BehavioralRiskIndicator {
   feature: string;
   value: any;
   direction: string;
@@ -53,7 +53,7 @@ export interface CombinedAnalysisResponse extends PredictResponse {
   segment_name: string;
   segment_description: string;
   recommended_strategy: string;
-  key_drivers: KeyDriver[];
+  behavioral_risk_indicators: BehavioralRiskIndicator[];
 }
 
 export interface CustomerRecord {
@@ -72,6 +72,8 @@ export interface CustomerRecord {
   contacts_count: number;
   credit_limit: number;
   utilization_ratio: number;
+  prediction_scope: 'holdout_test' | 'training_in_sample_demo';
+  threshold_applied: number;
 }
 
 export interface CustomerListResponse {
@@ -126,6 +128,12 @@ export interface AnalyticsSummary {
     demographics_overview: Record<string, Record<string, number>>;
   };
   statistical_tests: {
+    multiple_testing: {
+      method: string;
+      alpha: number;
+      family_size: number;
+      primary_tests: string;
+    };
     categorical_tests: {
       feature: string;
       test_type: string;
@@ -135,6 +143,8 @@ export interface AnalyticsSummary {
       cramers_v: number;
       effect_size_label: string;
       is_significant: boolean;
+      fdr_adjusted_p_value: number;
+      is_significant_fdr_0_05: boolean;
       interpretation: string;
       categories_breakdown: {
         category: string;
@@ -160,6 +170,8 @@ export interface AnalyticsSummary {
       rank_biserial_correlation: number;
       effect_size_label: string;
       is_significant: boolean;
+      fdr_adjusted_p_value: number;
+      is_significant_fdr_0_05: boolean;
       interpretation: string;
     }[];
   };
@@ -179,7 +191,7 @@ export interface AnalyticsSummary {
         lift_at_10_pct: number;
       };
     };
-    optimized_metrics: {
+    selected_threshold_metrics: {
       threshold: number;
       accuracy: number;
       precision: number;
@@ -215,16 +227,32 @@ export interface AnalyticsSummary {
       accuracy: number;
     }[];
     selected_threshold: number;
+    threshold_selection: {
+      source: string;
+      metric: string;
+      test_set_used_for_selection: boolean;
+    };
     coefficients: {
       feature: string;
       coefficient: number;
       odds_ratio: number;
       impact: string;
+      comparison_basis: string;
     }[];
+    odds_ratio_notes: {
+      numerical_features: string;
+      categorical_features: string;
+      categorical_reference_categories: Record<string, string>;
+    };
   };
   segmentation: {
     k_evaluation: { k: number; inertia: number; silhouette_score: number }[];
-    optimal_k: number;
+    selected_k: number;
+    selection_statement: string;
+    selection_rationale: {
+      silhouette_note: string;
+      criteria: string[];
+    };
     clustering_features: string[];
     cluster_profiles: ClusterProfile[];
     pca: {

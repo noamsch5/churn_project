@@ -1,6 +1,6 @@
 """
 Evaluation metrics for churn classification and business performance.
-Includes standard ML metrics, ROC/PR curve points, lift, and threshold optimization.
+Includes standard ML metrics, ROC/PR curve points, lift, and threshold selection.
 """
 
 from typing import Any
@@ -102,14 +102,15 @@ def compute_curve_points(
     }
 
 
-def find_optimal_threshold(
+def select_threshold(
     y_true: np.ndarray,
     y_prob: np.ndarray,
     metric: str = "f1",
 ) -> tuple[float, list[dict[str, float]]]:
     """
     Sweeps thresholds from 0.05 to 0.95 with step 0.01.
-    Finds threshold maximizing specified metric ('f1', 'balanced_accuracy', or recall/precision tradeoff).
+    Selects the threshold maximizing the specified metric. The caller is responsible
+    for supplying validation or out-of-fold training predictions, never test data.
     Returns (best_threshold, sweep_data).
     """
     thresholds = np.linspace(0.05, 0.95, 91)

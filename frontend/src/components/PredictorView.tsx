@@ -162,7 +162,7 @@ export const PredictorView: React.FC = () => {
     try {
       const data = await analyzeCustomer(inputToUse || formData);
       setResult(data);
-    } catch (err: any) {
+    } catch {
       setError('Unable to score customer via API. Verify the FastAPI backend is running on port 8000.');
     } finally {
       setLoading(false);
@@ -204,13 +204,13 @@ export const PredictorView: React.FC = () => {
         ))}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '1.5rem', alignItems: 'start' }}>
+      <div className="predictor-layout">
         {/* Input Parameters Form */}
         <div className="card-box">
           <div className="card-header">
             <div>
               <h3 className="card-title">Customer Account Profile</h3>
-              <p className="card-subtitle">21 input features configured for zero-leakage inference.</p>
+              <p className="card-subtitle">19 model input features configured for zero-leakage inference.</p>
             </div>
             <button className="btn-primary" onClick={() => runAnalysis()} disabled={loading}>
               <Gauge size={16} />
@@ -492,14 +492,17 @@ export const PredictorView: React.FC = () => {
                 </div>
               </div>
 
-              {/* Key Explanatory Drivers */}
+              {/* Analysis-derived behavioral indicators */}
               <div className="card-box">
                 <h4 style={{ fontSize: '0.95rem', fontWeight: 600, marginBottom: '0.75rem' }}>
-                  Top Model Drivers for this Account
+                  Behavioral Risk Indicators
                 </h4>
-                {result.key_drivers.length > 0 ? (
+                <p style={{ fontSize: '0.78rem', color: '#64748b', marginBottom: '0.75rem' }}>
+                  Observed signals based on portfolio-level analysis patterns; these are not local feature-attribution values.
+                </p>
+                {result.behavioral_risk_indicators.length > 0 ? (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    {result.key_drivers.map((d, i) => (
+                    {result.behavioral_risk_indicators.map((d, i) => (
                       <div
                         key={i}
                         style={{
